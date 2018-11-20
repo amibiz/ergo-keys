@@ -1,0 +1,9 @@
+ErgoKeys
+========
+
+A modal keybinding for Intellij family of IDEs (like vim), but based on command frequency and ergonomics.
+Inspired by xah-fly-keys (https://github.com/xahlee/xah-fly-keys), independently implemented as a plugin for Intellij.
+
+Alt-Space    activate "Command Mode"
+F (qwerty)   activate "Insert Mode"
+U (dvorak)   activate "Insert Mode"

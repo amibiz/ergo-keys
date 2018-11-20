@@ -1,0 +1,54 @@
+<idea-plugin>
+    <id>com.github.amibiz.ergokeys</id>
+    <name>ErgoKeys</name>
+    <vendor url="https://github.com/amibiz/ergo-keys">Ami E. Bizamcher (aeb)</vendor>
+
+    <description><![CDATA[
+    Supercharge your productivity with the most efficient keybinding for Intellij family of IDEs.
+    <br>
+    <br>
+    A modal keybinding for Intellij family of IDEs (like vim), but based on command frequency and ergonomics.
+    <br>
+    Inspired by <a href="https://github.com/xahlee/xah-fly-keys">xah-fly-keys</a>, independently implemented as a plugin for Intellij.
+    <br>
+    <br>
+    <code>
+    Alt-Space    activate <i>Command Mode</i><br>
+    F (qwerty)   activate <i>Insert Mode</i><br>
+    U (dvorak)   activate <i>Insert Mode</i><br>
+    </code>
+    ]]></description>
+
+    <!--&lt;!&ndash; please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description &ndash;&gt;-->
+    <idea-version since-build="181"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <applicationConfigurable instance="com.github.amibiz.ergokeys.ErgoKeysConfigurable"/>
+        <applicationService serviceInterface="com.github.amibiz.ergokeys.ErgoKeysSettings"
+                            serviceImplementation="com.github.amibiz.ergokeys.ErgoKeysSettings"/>
+    </extensions>
+
+    <application-components>
+        <!-- Add your application components here -->
+        <component>
+            <implementation-class>com.github.amibiz.ergokeys.ErgoKeysPlugin</implementation-class>
+        </component>
+    </application-components>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="ErgoKeysCommandMode" class="com.github.amibiz.ergokeys.CommandModeAction" text="Command Mode"
+                description="Activate Command Mode">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt SPACE"/>
+        </action>
+        <action id="ErgoKeysInsertMode" class="com.github.amibiz.ergokeys.InsertModeAction" text="Insert Mode"
+                description="Activate Insert Mode"/>
+        <action id="ErgoKeysSelectString" class="com.github.amibiz.ergokeys.SelectStringAction" text="Select String"
+                description="Select String"/>
+    </actions>
+</idea-plugin>
