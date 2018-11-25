@@ -4,12 +4,12 @@
     <vendor url="https://github.com/amibiz/ergo-keys">Ami E. Bizamcher (aeb)</vendor>
 
     <description><![CDATA[
-    Supercharge your productivity with the most efficient keybinding for Intellij family of IDEs.
+    Supercharge your productivity with the most efficient keybinding for IntelliJ family of IDEs.
     <br>
     <br>
-    A modal keybinding for Intellij family of IDEs (like vim), but based on command frequency and ergonomics.
+    A modal keybinding for IntelliJ family of IDEs (like vim), but based on command frequency and ergonomics.
     <br>
-    Inspired by <a href="https://github.com/xahlee/xah-fly-keys">xah-fly-keys</a>, independently implemented as a plugin for Intellij.
+    Inspired by <a href="https://github.com/xahlee/xah-fly-keys">xah-fly-keys</a>, independently implemented as a plugin for IntelliJ.
     <br>
     <br>
     <code>

@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.amibiz'
-version '1.0'
+version '1.1'
 
 sourceCompatibility = 1.8
 
@@ -22,4 +22,5 @@ intellij {
 
 patchPluginXml {
     sinceBuild '181'
+    untilBuild '183.*'
 }
