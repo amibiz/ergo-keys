@@ -109,8 +109,10 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_B, KeyEvent.VK_X),
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_M, KeyEvent.VK_M),
-            new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_COMMA, KeyEvent.VK_V),
-            new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_SLASH, KeyEvent.VK_Z),
+            new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_PERIOD, KeyEvent.VK_V),
+
+            // Navigation
+            new ActionBinding("GotoDeclaration", KeyEvent.VK_SLASH, KeyEvent.VK_Z),
     };
     private Keymap userKeymap;
     private Keymap commandModeKeymap;
