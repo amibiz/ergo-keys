@@ -59,17 +59,24 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             new ActionBinding("EditorDown", KeyEvent.VK_K, KeyEvent.VK_T),
             new ActionBinding("EditorPreviousWord", KeyEvent.VK_U, KeyEvent.VK_G),
             new ActionBinding("EditorNextWord", KeyEvent.VK_O, KeyEvent.VK_R),
-            new ActionBinding("EditorLineStart", KeyEvent.VK_H, KeyEvent.VK_D),
-            new ActionBinding("EditorLineEnd", KeyEvent.VK_SEMICOLON, KeyEvent.VK_S),
+            new ActionBinding("ErgoKeysStartOfLineOrParagraphAction", KeyEvent.VK_H, KeyEvent.VK_D),
+            new ActionBinding("ErgoKeysEndOfLineOrParagraphAction", KeyEvent.VK_SEMICOLON, KeyEvent.VK_S),
             new ActionBinding("NextSplitter", KeyEvent.VK_COMMA, KeyEvent.VK_W),
             new ActionBinding("Find", KeyEvent.VK_N, KeyEvent.VK_B),
 
+            new ActionBinding("EditorSelectWord", KeyEvent.VK_1, KeyEvent.VK_1),
+            new ActionBinding("EditorSelectLine", KeyEvent.VK_2, KeyEvent.VK_2),
             new ActionBinding("UnsplitAll", KeyEvent.VK_3, KeyEvent.VK_3),
             new ActionBinding("SplitVertically", KeyEvent.VK_4, KeyEvent.VK_4),
             new ActionBinding("$Delete", KeyEvent.VK_5, KeyEvent.VK_5),
             new ActionBinding("EditorSelectLine", KeyEvent.VK_7, KeyEvent.VK_7),
             new ActionBinding("EditorSelectWord", KeyEvent.VK_8, KeyEvent.VK_8),
             new ActionBinding("ErgoKeysSelectString", KeyEvent.VK_9, KeyEvent.VK_9),
+
+            new ActionBinding("ErgoKeysDeleteCurrentCodeBlockAction", KeyEvent.VK_G, KeyEvent.VK_I),
+            new ActionBinding("EditorToggleCase", KeyEvent.VK_B, KeyEvent.VK_X),
+            new ActionBinding("HippieCompletion", KeyEvent.VK_OPEN_BRACKET, KeyEvent.VK_SLASH),
+            new ActionBinding("ErgoKeysActivateInsertModeSpaceBefore", KeyEvent.VK_P, KeyEvent.VK_L),
 
             // Tab shortcuts
             new ActionBinding("EditorTab", KeyEvent.VK_TAB, KeyEvent.VK_TAB),
@@ -89,30 +96,24 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             new ActionBinding("EditorEscape", KeyEvent.VK_ESCAPE, KeyEvent.VK_ESCAPE),
             new ActionBinding("EditorBackSpace", KeyEvent.VK_BACK_SPACE, KeyEvent.VK_BACK_SPACE),
 
+            // Navigation
+            new ActionBinding("GotoDeclaration", KeyEvent.VK_SLASH, KeyEvent.VK_Z),
+
             // Unused keys
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_BACK_QUOTE, KeyEvent.VK_BACK_QUOTE),
-            new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_1, KeyEvent.VK_1),
-            new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_2, KeyEvent.VK_2),
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_6, KeyEvent.VK_6),
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_0, KeyEvent.VK_0),
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_MINUS, KeyEvent.VK_OPEN_BRACKET),
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_EQUALS, KeyEvent.VK_CLOSE_BRACKET),
-
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_W, KeyEvent.VK_COMMA),
-            new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_P, KeyEvent.VK_L),
-            new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_OPEN_BRACKET, KeyEvent.VK_SLASH),
+
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_CLOSE_BRACKET, KeyEvent.VK_EQUALS),
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_BACK_SLASH, KeyEvent.VK_BACK_SLASH),
 
-            new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_G, KeyEvent.VK_I),
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_QUOTE, KeyEvent.VK_MINUS),
 
-            new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_B, KeyEvent.VK_X),
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_M, KeyEvent.VK_M),
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_PERIOD, KeyEvent.VK_V),
-
-            // Navigation
-            new ActionBinding("GotoDeclaration", KeyEvent.VK_SLASH, KeyEvent.VK_Z),
     };
     private Keymap userKeymap;
     private Keymap commandModeKeymap;

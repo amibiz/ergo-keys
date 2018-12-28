@@ -50,5 +50,20 @@
                 description="Activate Insert Mode"/>
         <action id="ErgoKeysSelectString" class="com.github.amibiz.ergokeys.SelectStringAction" text="Select String"
                 description="Select String"/>
+        <action id="ErgoKeysStartOfLineOrParagraphAction"
+                class="com.github.amibiz.ergokeys.StartOfLineOrParagraphAction"
+                text="Move Caret to Line or Block Start"
+                description="Move Caret to Line or Block Start"/>
+        <action id="ErgoKeysEndOfLineOrParagraphAction"
+                class="com.github.amibiz.ergokeys.EndOfLineOrParagraphAction" text="EndOfLineOrParagraphAction"
+                description="EndOfLineOrParagraphAction"/>
+        <action id="ErgoKeysDeleteCurrentCodeBlockAction"
+                class="com.github.amibiz.ergokeys.DeleteCurrentCodeBlockAction"
+                text="ErgoKeysDeleteCurrentCodeBlockAction"
+                description="DeleteCurrentCodeBlockAction"/>
+        <action id="ErgoKeysActivateInsertModeSpaceBefore"
+                class="com.github.amibiz.ergokeys.ActivateInsertModeSpaceBeforeAction"
+                text="ActivateInsertModeSpaceBefore"
+                description="ActivateInsertModeSpaceBefore"/>
     </actions>
 </idea-plugin>
