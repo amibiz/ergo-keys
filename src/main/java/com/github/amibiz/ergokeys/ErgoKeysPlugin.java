@@ -115,6 +115,14 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_M, KeyEvent.VK_M),
             new ActionBinding("ErgoKeysNoopAction", KeyEvent.VK_PERIOD, KeyEvent.VK_V),
     };
+
+    private final ActionBinding[] leaderBindings = {
+            new ActionBinding("Back", KeyEvent.VK_J, KeyEvent.VK_H),
+            new ActionBinding("Forward", KeyEvent.VK_L, KeyEvent.VK_N),
+            new ActionBinding("GotoImplementation", KeyEvent.VK_SLASH, KeyEvent.VK_Z),
+            new ActionBinding("FindInPath", KeyEvent.VK_N, KeyEvent.VK_B),
+    };
+
     private Keymap userKeymap;
     private Keymap commandModeKeymap;
     private boolean shouldActivateCommandModeOnFocusGain;
@@ -233,11 +241,21 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                     commandModeKeymap.addShortcut(binding.actionId,
                             new KeyboardShortcut(KeyStroke.getKeyStroke(binding.dvorakKeyCode, 0), null));
                 }
+                for (ActionBinding binding : leaderBindings) {
+                    commandModeKeymap.addShortcut(binding.actionId,
+                            new KeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0),
+                                    KeyStroke.getKeyStroke(binding.dvorakKeyCode, 0)));
+                }
                 break;
             case "qwerty":
                 for (ActionBinding binding : bindings) {
                     commandModeKeymap.addShortcut(binding.actionId,
                             new KeyboardShortcut(KeyStroke.getKeyStroke(binding.qwertyKeyCode, 0), null));
+                }
+                for (ActionBinding binding : leaderBindings) {
+                    commandModeKeymap.addShortcut(binding.actionId,
+                            new KeyboardShortcut(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0),
+                                    KeyStroke.getKeyStroke(binding.qwertyKeyCode, 0)));
                 }
                 break;
             default:
