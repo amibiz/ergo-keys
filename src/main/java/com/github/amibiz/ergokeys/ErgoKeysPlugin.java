@@ -43,7 +43,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             new ActionBinding("EditorToggleStickySelection", KeyEvent.VK_T, KeyEvent.VK_Y),
             new ActionBinding("$Undo", KeyEvent.VK_Y, KeyEvent.VK_F),
 
-            new ActionBinding("GotoAction", KeyEvent.VK_A, KeyEvent.VK_A),
+            new ActionBinding("ErgoKeysGotoAction", KeyEvent.VK_A, KeyEvent.VK_A),
             new ActionBinding("EditorEnter", KeyEvent.VK_S, KeyEvent.VK_O),
             new ActionBinding("EditorBackSpace", KeyEvent.VK_D, KeyEvent.VK_E),
             new ActionBinding("ErgoKeysInsertMode", KeyEvent.VK_F, KeyEvent.VK_U),
@@ -121,6 +121,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             new ActionBinding("Forward", KeyEvent.VK_L, KeyEvent.VK_N),
             new ActionBinding("GotoImplementation", KeyEvent.VK_SLASH, KeyEvent.VK_Z),
             new ActionBinding("FindInPath", KeyEvent.VK_N, KeyEvent.VK_B),
+            new ActionBinding("Switcher",  KeyEvent.VK_COMMA, KeyEvent.VK_W)
     };
 
     private Keymap userKeymap;
@@ -281,7 +282,9 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
 
     public void deactivateCommandMode(Editor editor) {
-        editor.getSettings().setBlockCursor(false);
+        if (!editor.isDisposed()) {
+            editor.getSettings().setBlockCursor(false);
+        }
         KeymapManagerEx.getInstanceEx().setActiveKeymap(userKeymap);
     }
 

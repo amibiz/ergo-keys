@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.3.10'
+    id 'org.jetbrains.intellij' version '0.4.10'
 }
 
 group 'com.github.amibiz'
@@ -17,10 +17,11 @@ dependencies {
 }
 
 intellij {
+    plugins 'java'
     version '2018.2.5'
 }
 
 patchPluginXml {
     sinceBuild '181'
-    untilBuild '191.*'
+    untilBuild '192.*'
 }

@@ -25,7 +25,7 @@ public class ActivateInsertModeSpaceBeforeAction extends AnAction {
                 document.insertString(caret.getOffset(), " ");
             }
         });
-        actionManager.getAction(IdeActions.ACTION_EDITOR_MOVE_CARET_RIGHT).actionPerformed(e);
+        actionManager.getAction(IdeActions.ACTION_FILE_STRUCTURE_POPUP).actionPerformed(e);
         actionManager.getAction("ErgoKeysInsertMode").actionPerformed(e);
     }
 }
