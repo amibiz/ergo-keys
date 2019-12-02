@@ -23,22 +23,12 @@
     <idea-version since-build="181"/>
 
     <change-notes><![CDATA[
-    <b>1.4</b><br/>
-    Bug fixes, platform updates and new key bindings
+    <b>1.5</b><br/>
+    Platform updates and new key bindings
     <ul>
-        <li>fix Find Action disables some keys when invoked</li>
-        <li>fix editor already disposed exception</li>
-        <li>update IntelliJ support to 192.*</li>
-        <li>
-            add leader key bindings
-            <ul>
-                <li>bind [Space] + J -> navigate back</li>
-                <li>bind [Space] + L -> navigate forward</li>
-                <li>bind [Space] + / -> goto implementation</li>
-                <li>bind [Space] + N -> find in path</li>
-                <li>bind [Space] + W -> open switcher</li>
-            </ul>
-        </li>
+        <li>update IntelliJ support to 193.*</li>
+        <li>bind [Space] + H -> previous change</li>
+        <li>bind [Space] + ; -> next change</li>
     </ul>
     ]]></change-notes>
 
