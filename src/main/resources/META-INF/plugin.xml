@@ -11,24 +11,23 @@
     <br>
     Inspired by <a href="https://github.com/xahlee/xah-fly-keys">xah-fly-keys</a>, independently implemented as a plugin for IntelliJ.
     <br>
-    <br>
-    <code>
-    Alt-Space    activate <i>Command Mode</i><br>
-    F (qwerty)   activate <i>Insert Mode</i><br>
-    U (dvorak)   activate <i>Insert Mode</i><br>
-    </code>
+    <pre>Alt-Space    activate <i>Command Mode</i>
+F (qwerty)   activate <i>Insert Mode</i>
+U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <!--&lt;!&ndash; please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description &ndash;&gt;-->
     <idea-version since-build="181"/>
 
     <change-notes><![CDATA[
-    <b>1.5</b><br/>
-    Platform updates and new key bindings
+    <b>1.6</b><br/>
+    New key bindings
     <ul>
-        <li>update IntelliJ support to 193.*</li>
-        <li>bind [Space] + H -> previous change</li>
-        <li>bind [Space] + ; -> next change</li>
+        <li>bind [Space] + P -> open file structure popup</li>
+        <li>bind [Space] + H -> go to start of text</li>
+        <li>bind [Space] + ; -> go to end of text</li>
+        <li>bind [Space] + U -> previous change</li>
+        <li>bind [Space] + O -> next change</li>
     </ul>
     ]]></change-notes>
 

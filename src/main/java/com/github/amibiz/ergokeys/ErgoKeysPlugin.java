@@ -122,8 +122,11 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             new ActionBinding("GotoImplementation", KeyEvent.VK_SLASH, KeyEvent.VK_Z),
             new ActionBinding("FindInPath", KeyEvent.VK_N, KeyEvent.VK_B),
             new ActionBinding("Switcher", KeyEvent.VK_COMMA, KeyEvent.VK_W),
-            new ActionBinding("VcsShowNextChangeMarker", KeyEvent.VK_H, KeyEvent.VK_D),
-            new ActionBinding("VcsShowPrevChangeMarker", KeyEvent.VK_SEMICOLON, KeyEvent.VK_S),
+            new ActionBinding("FileStructurePopup", KeyEvent.VK_P, KeyEvent.VK_L),
+            new ActionBinding("EditorTextStart", KeyEvent.VK_H, KeyEvent.VK_D),
+            new ActionBinding("EditorTextEnd", KeyEvent.VK_SEMICOLON, KeyEvent.VK_S),
+            new ActionBinding("VcsShowPrevChangeMarker", KeyEvent.VK_U, KeyEvent.VK_G),
+            new ActionBinding("VcsShowNextChangeMarker", KeyEvent.VK_O, KeyEvent.VK_R),
     };
 
     private Keymap userKeymap;

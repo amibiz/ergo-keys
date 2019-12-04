@@ -1,6 +1,9 @@
 package com.github.amibiz.ergokeys;
 
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
@@ -25,7 +28,6 @@ public class ActivateInsertModeSpaceBeforeAction extends AnAction {
                 document.insertString(caret.getOffset(), " ");
             }
         });
-        actionManager.getAction(IdeActions.ACTION_FILE_STRUCTURE_POPUP).actionPerformed(e);
         actionManager.getAction("ErgoKeysInsertMode").actionPerformed(e);
     }
 }
