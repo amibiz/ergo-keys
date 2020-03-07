@@ -120,7 +120,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             new ActionBinding("Back", KeyEvent.VK_J, KeyEvent.VK_H),
             new ActionBinding("Forward", KeyEvent.VK_L, KeyEvent.VK_N),
             new ActionBinding("GotoImplementation", KeyEvent.VK_SLASH, KeyEvent.VK_Z),
-            new ActionBinding("FindInPath", KeyEvent.VK_N, KeyEvent.VK_B),
+            new ActionBinding("ErgoKeysFindInPathAction", KeyEvent.VK_N, KeyEvent.VK_B),
             new ActionBinding("Switcher", KeyEvent.VK_COMMA, KeyEvent.VK_W),
             new ActionBinding("FileStructurePopup", KeyEvent.VK_P, KeyEvent.VK_L),
             new ActionBinding("EditorTextStart", KeyEvent.VK_H, KeyEvent.VK_D),
