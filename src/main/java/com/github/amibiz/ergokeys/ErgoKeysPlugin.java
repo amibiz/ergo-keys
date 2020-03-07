@@ -207,6 +207,12 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                             public void focusLost(FocusEvent focusEvent) {
                                 LOG.debug("editor: " + editor.toString() + " lost focus");
 
+                                if (focusEvent.isTemporary()) {
+                                    deactivateCommandMode(editor);
+                                    shouldActivateCommandModeOnFocusGain = true;
+                                    return;
+                                }
+
                                 if (focusEvent.getOppositeComponent() instanceof EditorComponentImpl) {
                                     shouldActivateCommandModeOnFocusGain = false;
                                     return;
