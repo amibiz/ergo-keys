@@ -20,14 +20,13 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     <idea-version since-build="181"/>
 
     <change-notes><![CDATA[
-    <b>1.6</b><br/>
-    New key bindings
+    <b>1.7</b><br/>
     <ul>
-        <li>bind [Space] + P -> open file structure popup</li>
-        <li>bind [Space] + H -> go to start of text</li>
-        <li>bind [Space] + ; -> go to end of text</li>
-        <li>bind [Space] + U -> previous change</li>
-        <li>bind [Space] + O -> next change</li>
+        <li>update IntelliJ support to 201.*</li>
+        <li>fix invoking menu actions while in command mode</li>
+        <li>fix find in path command/insert mode switching</li>
+        <li>bind [Space] + 8 -> select next occurrence</li>
+        <li>bind [Space] + Enter -> show intention actions</li>
     </ul>
     ]]></change-notes>
 
