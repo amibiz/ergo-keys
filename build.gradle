@@ -23,5 +23,5 @@ intellij {
 
 patchPluginXml {
     sinceBuild '181'
-    untilBuild '193.*'
+    untilBuild '201.*'
 }
