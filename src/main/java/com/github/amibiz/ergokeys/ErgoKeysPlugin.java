@@ -127,6 +127,8 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             new ActionBinding("EditorTextEnd", KeyEvent.VK_SEMICOLON, KeyEvent.VK_S),
             new ActionBinding("VcsShowPrevChangeMarker", KeyEvent.VK_U, KeyEvent.VK_G),
             new ActionBinding("VcsShowNextChangeMarker", KeyEvent.VK_O, KeyEvent.VK_R),
+            new ActionBinding("SelectNextOccurrence", KeyEvent.VK_8, KeyEvent.VK_8),
+            new ActionBinding("ShowIntentionActions", KeyEvent.VK_ENTER, KeyEvent.VK_ENTER),
     };
 
     private Keymap userKeymap;
