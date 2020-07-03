@@ -24,9 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 public class ErgoKeysPlugin implements ApplicationComponent {
 
@@ -187,11 +185,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                             public void focusGained(FocusEvent focusEvent) {
                                 LOG.debug("editor: " + editor.toString() + " gained focus");
 
-                                if (inCommandMode()) {
-                                    editor.getSettings().setBlockCursor(true);
-                                } else {
-                                    editor.getSettings().setBlockCursor(false);
-                                }
+                                editor.getSettings().setBlockCursor(inCommandMode());
 
                                 if (focusEvent.getOppositeComponent() instanceof EditorComponentImpl) {
                                     return;
@@ -247,6 +241,32 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             }
             commandModeKeymap.removeAllActionShortcuts(actionId);
         }
+
+        // Add mouse button1 shortcuts (taken from $default keymap)
+        commandModeKeymap.addShortcut("QuickEvaluateExpression",
+                new MouseShortcut(MouseEvent.BUTTON1, InputEvent.ALT_DOWN_MASK, 1));
+        commandModeKeymap.addShortcut("EditorAddOrRemoveCaret",
+                new MouseShortcut(MouseEvent.BUTTON1, InputEvent.ALT_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, 1));
+        commandModeKeymap.addShortcut("EditorAddRectangularSelectionOnMouseDrag",
+                new MouseShortcut(MouseEvent.BUTTON1, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, 1));
+        commandModeKeymap.addShortcut("EditorCreateRectangularSelectionOnMouseDrag",
+                new MouseShortcut(MouseEvent.BUTTON1, InputEvent.ALT_DOWN_MASK, 1));
+        commandModeKeymap.addShortcut("GotoDeclaration",
+                new MouseShortcut(MouseEvent.BUTTON1, InputEvent.CTRL_DOWN_MASK, 1));
+        commandModeKeymap.addShortcut("GotoTypeDeclaration",
+                new MouseShortcut(MouseEvent.BUTTON1, InputEvent.CTRL_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, 1));
+        commandModeKeymap.addShortcut("GotoImplementation",
+                new MouseShortcut(MouseEvent.BUTTON1, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK, 1));
+
+        // Add mouse button2 shortcuts (taken from $default keymap)
+        commandModeKeymap.addShortcut("QuickJavaDoc",
+                new MouseShortcut(MouseEvent.BUTTON2, InputEvent.ALT_DOWN_MASK, 1));
+        commandModeKeymap.addShortcut("EditorPasteFromX11",
+                new MouseShortcut(MouseEvent.BUTTON2, 0, 1));
+        commandModeKeymap.addShortcut("EditorCreateRectangularSelection",
+                new MouseShortcut(MouseEvent.BUTTON2, InputEvent.ALT_DOWN_MASK | InputEvent.SHIFT_DOWN_MASK, 1));
+        commandModeKeymap.addShortcut("EditorCreateRectangularSelectionOnMouseDrag",
+                new MouseShortcut(MouseEvent.BUTTON2, InputEvent.BUTTON2_DOWN_MASK, 1));
 
         String keyboardLayout = settings.getKeyboardLayout();
         switch (keyboardLayout) {
