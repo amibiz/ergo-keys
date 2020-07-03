@@ -11,7 +11,10 @@
     <br>
     Inspired by <a href="https://github.com/xahlee/xah-fly-keys">xah-fly-keys</a>, independently implemented as a plugin for IntelliJ.
     <br>
+    <br>
     <pre>Alt-Space    activate <i>Command Mode</i>
+Shift-Space  activate <i>Command Mode</i>
+
 F (qwerty)   activate <i>Insert Mode</i>
 U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
@@ -20,13 +23,11 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     <idea-version since-build="181"/>
 
     <change-notes><![CDATA[
-    <b>1.7</b><br/>
+    <b>1.8</b><br/>
     <ul>
-        <li>update IntelliJ support to 201.*</li>
-        <li>fix invoking menu actions while in command mode</li>
-        <li>fix find in path command/insert mode switching</li>
-        <li>bind [Space] + 8 -> select next occurrence</li>
-        <li>bind [Space] + Enter -> show intention actions</li>
+        <li>Document all supported key bindings</li>
+        <li>Support mouse shortcuts in command mode</li>
+        <li>Fix command mode binding taken by Windows OS</li>
     </ul>
     ]]></change-notes>
 
