@@ -53,6 +53,7 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
         <action id="ErgoKeysCommandMode" class="com.github.amibiz.ergokeys.CommandModeAction" text="Command Mode"
                 description="Activate Command Mode">
             <keyboard-shortcut keymap="$default" first-keystroke="alt SPACE"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift SPACE"/>
         </action>
         <action id="ErgoKeysInsertMode" class="com.github.amibiz.ergokeys.InsertModeAction" text="Insert Mode"
                 description="Activate Insert Mode"/>
