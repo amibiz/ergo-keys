@@ -46,19 +46,16 @@ public class ErgoKeysConfigurable implements SearchableConfigurable {
 
     @Override
     public void reset() {
-        ui.setKeyboardLayout(settings.getKeyboardLayout());
         ui.setCommandModeToggle(settings.isCommandModeToggle());
     }
 
     @Override
     public boolean isModified() {
-        return !settings.getKeyboardLayout().equals(ui.getKeyboardLayout()) ||
-                settings.isCommandModeToggle() != ui.isCommandModeToggle();
+        return settings.isCommandModeToggle() != ui.isCommandModeToggle();
     }
 
     @Override
     public void apply() {
-        settings.setKeyboardLayout(ui.getKeyboardLayout());
         settings.setCommandModeToggle(ui.isCommandModeToggle());
         plugin.applySettings();
     }

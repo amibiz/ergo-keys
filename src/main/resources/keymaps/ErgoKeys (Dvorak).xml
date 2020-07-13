@@ -1,0 +1,167 @@
+<keymap version="1" name="ErgoKeys (Dvorak)" parent="$ergokeys">
+
+    <!-- Insert Mode -->
+    <action id="ErgoKeysInsertMode">
+        <keyboard-shortcut first-keystroke="U"/>
+    </action>
+
+    <!-- Navigation -->
+    <action id="EditorLeft">
+        <keyboard-shortcut first-keystroke="H"/>
+    </action>
+    <action id="EditorRight">
+        <keyboard-shortcut first-keystroke="N"/>
+    </action>
+    <action id="EditorUp">
+        <keyboard-shortcut first-keystroke="C"/>
+    </action>
+    <action id="EditorDown">
+        <keyboard-shortcut first-keystroke="T"/>
+    </action>
+    <action id="EditorPreviousWord">
+        <keyboard-shortcut first-keystroke="G"/>
+    </action>
+    <action id="EditorNextWord">
+        <keyboard-shortcut first-keystroke="R"/>
+    </action>
+    <action id="ErgoKeysStartOfLineOrParagraphAction">
+        <keyboard-shortcut first-keystroke="D"/>
+    </action>
+    <action id="ErgoKeysEndOfLineOrParagraphAction">
+        <keyboard-shortcut first-keystroke="S"/>
+    </action>
+    <action id="NextSplitter">
+        <keyboard-shortcut first-keystroke="W"/>
+    </action>
+    <action id="GotoDeclaration">
+        <keyboard-shortcut first-keystroke="Z"/>
+    </action>
+    <action id="Back">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="H"/>
+    </action>
+    <action id="Forward">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="N"/>
+    </action>
+    <action id="GotoImplementation">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="Z"/>
+    </action>
+    <action id="Switcher">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="W"/>
+    </action>
+    <action id="EditorTextStart">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="D"/>
+    </action>
+    <action id="EditorTextEnd">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="S"/>
+    </action>
+    <action id="VcsShowPrevChangeMarker">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="G"/>
+    </action>
+    <action id="VcsShowNextChangeMarker">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="R"/>
+    </action>
+
+    <!-- Cut/Copy/Paste/Undo -->
+    <action id="EditorCut">
+        <keyboard-shortcut first-keystroke="Q"/>
+    </action>
+    <action id="EditorCopy">
+        <keyboard-shortcut first-keystroke="J"/>
+    </action>
+    <action id="EditorPaste">
+        <keyboard-shortcut first-keystroke="K"/>
+    </action>
+    <action id="$Undo">
+        <keyboard-shortcut first-keystroke="F"/>
+    </action>
+
+    <!-- Selection -->
+    <action id="EditorToggleStickySelection">
+        <keyboard-shortcut first-keystroke="Y"/>
+    </action>
+    <action id="EditorSelectLine">
+        <keyboard-shortcut first-keystroke="2"/>
+        <keyboard-shortcut first-keystroke="7"/>
+    </action>
+    <action id="EditorSelectWord">
+        <keyboard-shortcut first-keystroke="1"/>
+        <keyboard-shortcut first-keystroke="8"/>
+    </action>
+    <action id="ErgoKeysSelectString">
+        <keyboard-shortcut first-keystroke="9"/>
+    </action>
+    <action id="SelectNextOccurrence">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="8"/>
+    </action>
+
+    <!-- Modification -->
+    <action id="EditorDeleteToWordStart">
+        <keyboard-shortcut first-keystroke="PERIOD"/>
+    </action>
+    <action id="EditorDeleteToWordEnd">
+        <keyboard-shortcut first-keystroke="P"/>
+    </action>
+    <action id="CommentByLineComment">
+        <keyboard-shortcut first-keystroke="SEMICOLON"/>
+    </action>
+    <action id="AutoIndentLines">
+        <keyboard-shortcut first-keystroke="QUOTE"/>
+    </action>
+    <action id="EditorEnter">
+        <keyboard-shortcut first-keystroke="O"/>
+    </action>
+    <action id="EditorBackSpace">
+        <keyboard-shortcut first-keystroke="E"/>
+    </action>
+    <action id="$Delete">
+        <keyboard-shortcut first-keystroke="5"/>
+    </action>
+    <action id="ErgoKeysDeleteCurrentCodeBlockAction">
+        <keyboard-shortcut first-keystroke="I"/>
+    </action>
+    <action id="EditorToggleCase">
+        <keyboard-shortcut first-keystroke="X"/>
+    </action>
+    <action id="HippieCompletion">
+        <keyboard-shortcut first-keystroke="SLASH"/>
+    </action>
+    <action id="ErgoKeysActivateInsertModeSpaceBefore">
+        <keyboard-shortcut first-keystroke="L"/>
+    </action>
+
+    <!-- Miscellaneous  -->
+    <action id="ErgoKeysGotoAction">
+        <keyboard-shortcut first-keystroke="A"/>
+    </action>
+    <action id="Find">
+        <keyboard-shortcut first-keystroke="B"/>
+    </action>
+    <action id="UnsplitAll">
+        <keyboard-shortcut first-keystroke="3"/>
+    </action>
+    <action id="SplitVertically">
+        <keyboard-shortcut first-keystroke="4"/>
+    </action>
+    <action id="ErgoKeysFindInPathAction">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="B"/>
+    </action>
+    <action id="FileStructurePopup">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="L"/>
+    </action>
+    <action id="ShowIntentionActions">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="ENTER"/>
+    </action>
+
+</keymap>

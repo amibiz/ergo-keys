@@ -1,0 +1,113 @@
+<keymap version="1" name="$ergokeys" parent="$default">
+    <action id="ErgoKeysNoopAction">
+        <!-- number row -->
+        <keyboard-shortcut first-keystroke="BACK_QUOTE"/>
+        <keyboard-shortcut first-keystroke="1"/>
+        <keyboard-shortcut first-keystroke="2"/>
+        <keyboard-shortcut first-keystroke="3"/>
+        <keyboard-shortcut first-keystroke="4"/>
+        <keyboard-shortcut first-keystroke="5"/>
+        <keyboard-shortcut first-keystroke="6"/>
+        <keyboard-shortcut first-keystroke="7"/>
+        <keyboard-shortcut first-keystroke="8"/>
+        <keyboard-shortcut first-keystroke="9"/>
+        <keyboard-shortcut first-keystroke="0"/>
+        <keyboard-shortcut first-keystroke="MINUS"/>
+        <keyboard-shortcut first-keystroke="EQUALS"/>
+
+        <!-- top row -->
+        <keyboard-shortcut first-keystroke="Q"/>
+        <keyboard-shortcut first-keystroke="W"/>
+        <keyboard-shortcut first-keystroke="E"/>
+        <keyboard-shortcut first-keystroke="R"/>
+        <keyboard-shortcut first-keystroke="T"/>
+        <keyboard-shortcut first-keystroke="Y"/>
+        <keyboard-shortcut first-keystroke="U"/>
+        <keyboard-shortcut first-keystroke="I"/>
+        <keyboard-shortcut first-keystroke="O"/>
+        <keyboard-shortcut first-keystroke="P"/>
+        <keyboard-shortcut first-keystroke="OPEN_BRACKET"/>
+        <keyboard-shortcut first-keystroke="CLOSE_BRACKET"/>
+        <keyboard-shortcut first-keystroke="BACK_SLASH"/>
+
+        <!-- middle row -->
+        <keyboard-shortcut first-keystroke="A"/>
+        <keyboard-shortcut first-keystroke="S"/>
+        <keyboard-shortcut first-keystroke="D"/>
+        <keyboard-shortcut first-keystroke="F"/>
+        <keyboard-shortcut first-keystroke="G"/>
+        <keyboard-shortcut first-keystroke="H"/>
+        <keyboard-shortcut first-keystroke="J"/>
+        <keyboard-shortcut first-keystroke="K"/>
+        <keyboard-shortcut first-keystroke="L"/>
+        <keyboard-shortcut first-keystroke="SEMICOLON"/>
+        <keyboard-shortcut first-keystroke="QUOTE"/>
+
+        <!-- bottom row -->
+        <keyboard-shortcut first-keystroke="Z"/>
+        <keyboard-shortcut first-keystroke="X"/>
+        <keyboard-shortcut first-keystroke="C"/>
+        <keyboard-shortcut first-keystroke="V"/>
+        <keyboard-shortcut first-keystroke="B"/>
+        <keyboard-shortcut first-keystroke="N"/>
+        <keyboard-shortcut first-keystroke="M"/>
+        <keyboard-shortcut first-keystroke="COMMA"/>
+        <keyboard-shortcut first-keystroke="PERIOD"/>
+        <keyboard-shortcut first-keystroke="SLASH"/>
+
+        <!-- number row (with shift) -->
+        <keyboard-shortcut first-keystroke="SHIFT BACK_QUOTE"/>
+        <keyboard-shortcut first-keystroke="SHIFT 1"/>
+        <keyboard-shortcut first-keystroke="SHIFT 2"/>
+        <keyboard-shortcut first-keystroke="SHIFT 3"/>
+        <keyboard-shortcut first-keystroke="SHIFT 4"/>
+        <keyboard-shortcut first-keystroke="SHIFT 5"/>
+        <keyboard-shortcut first-keystroke="SHIFT 6"/>
+        <keyboard-shortcut first-keystroke="SHIFT 7"/>
+        <keyboard-shortcut first-keystroke="SHIFT 8"/>
+        <keyboard-shortcut first-keystroke="SHIFT 9"/>
+        <keyboard-shortcut first-keystroke="SHIFT 0"/>
+        <keyboard-shortcut first-keystroke="SHIFT MINUS"/>
+        <keyboard-shortcut first-keystroke="SHIFT EQUALS"/>
+
+        <!-- top row (with shift) -->
+        <keyboard-shortcut first-keystroke="SHIFT Q"/>
+        <keyboard-shortcut first-keystroke="SHIFT W"/>
+        <keyboard-shortcut first-keystroke="SHIFT E"/>
+        <keyboard-shortcut first-keystroke="SHIFT R"/>
+        <keyboard-shortcut first-keystroke="SHIFT T"/>
+        <keyboard-shortcut first-keystroke="SHIFT Y"/>
+        <keyboard-shortcut first-keystroke="SHIFT U"/>
+        <keyboard-shortcut first-keystroke="SHIFT I"/>
+        <keyboard-shortcut first-keystroke="SHIFT O"/>
+        <keyboard-shortcut first-keystroke="SHIFT P"/>
+        <keyboard-shortcut first-keystroke="SHIFT OPEN_BRACKET"/>
+        <keyboard-shortcut first-keystroke="SHIFT CLOSE_BRACKET"/>
+        <keyboard-shortcut first-keystroke="SHIFT BACK_SLASH"/>
+
+        <!-- middle row (with shift) -->
+        <keyboard-shortcut first-keystroke="SHIFT A"/>
+        <keyboard-shortcut first-keystroke="SHIFT S"/>
+        <keyboard-shortcut first-keystroke="SHIFT D"/>
+        <keyboard-shortcut first-keystroke="SHIFT F"/>
+        <keyboard-shortcut first-keystroke="SHIFT G"/>
+        <keyboard-shortcut first-keystroke="SHIFT H"/>
+        <keyboard-shortcut first-keystroke="SHIFT J"/>
+        <keyboard-shortcut first-keystroke="SHIFT K"/>
+        <keyboard-shortcut first-keystroke="SHIFT L"/>
+        <keyboard-shortcut first-keystroke="SHIFT SEMICOLON"/>
+        <keyboard-shortcut first-keystroke="SHIFT QUOTE"/>
+
+        <!-- bottom row (with shift) -->
+        <keyboard-shortcut first-keystroke="SHIFT Z"/>
+        <keyboard-shortcut first-keystroke="SHIFT X"/>
+        <keyboard-shortcut first-keystroke="SHIFT C"/>
+        <keyboard-shortcut first-keystroke="SHIFT V"/>
+        <keyboard-shortcut first-keystroke="SHIFT B"/>
+        <keyboard-shortcut first-keystroke="SHIFT N"/>
+        <keyboard-shortcut first-keystroke="SHIFT M"/>
+        <keyboard-shortcut first-keystroke="SHIFT COMMA"/>
+        <keyboard-shortcut first-keystroke="SHIFT PERIOD"/>
+        <keyboard-shortcut first-keystroke="SHIFT SLASH"/>
+    </action>
+</keymap>

@@ -20,7 +20,7 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <!--&lt;!&ndash; please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description &ndash;&gt;-->
-    <idea-version since-build="181"/>
+    <idea-version since-build="183"/>
 
     <change-notes><![CDATA[
     <b>1.8</b><br/>
@@ -48,6 +48,12 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
             <implementation-class>com.github.amibiz.ergokeys.ErgoKeysPlugin</implementation-class>
         </component>
     </application-components>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <bundledKeymap file="$ergokeys.xml"/>
+        <bundledKeymap file="ErgoKeys (QWERTY).xml"/>
+        <bundledKeymap file="ErgoKeys (Dvorak).xml"/>
+    </extensions>
 
     <actions>
         <!-- Add your actions here -->
