@@ -30,7 +30,7 @@ public class CommandModeAction extends AnAction {
         if (editor == null) {
             return;
         }
-        plugin.activateCommandMode(editor, true);
+        plugin.activateCommandMode(editor);
     }
 
 }

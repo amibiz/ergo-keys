@@ -19,7 +19,7 @@ public class FindInPathAction extends AnAction {
         // Get all the required data from data keys
         final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
 
-        this.plugin.deactivateCommandMode(editor);
+        this.plugin.activateInsertMode(editor);
 
         AnAction action = ActionManager.getInstance().getAction("FindInPath");
         action.actionPerformed(e);

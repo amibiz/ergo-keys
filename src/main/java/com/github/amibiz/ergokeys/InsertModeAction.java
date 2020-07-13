@@ -30,6 +30,6 @@ public class InsertModeAction extends AnAction {
         if (editor == null) {
             return;
         }
-        plugin.deactivateCommandMode(editor);
+        plugin.activateInsertMode(editor);
     }
 }

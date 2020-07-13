@@ -16,11 +16,8 @@ import org.jetbrains.annotations.Nullable;
 
 @State(name = "ErgoKeysSettings", storages = @Storage("ergokeys.xml"))
 public class ErgoKeysSettings implements PersistentStateComponent<ErgoKeysSettings> {
-    public static final String KEYBOARD_LAYOUT_QWERTY = "qwerty";
-    public static final String KEYBOARD_LAYOUT_DVORAK = "dvorak";
 
     // Defaults
-    private String keyboardLayout = KEYBOARD_LAYOUT_QWERTY;
     private boolean commandModeToggle = false;
 
     public static ErgoKeysSettings getInstance() {
@@ -36,14 +33,6 @@ public class ErgoKeysSettings implements PersistentStateComponent<ErgoKeysSettin
     @Override
     public void loadState(@NotNull ErgoKeysSettings state) {
         XmlSerializerUtil.copyBean(state, this);
-    }
-
-    public String getKeyboardLayout() {
-        return keyboardLayout;
-    }
-
-    public void setKeyboardLayout(String keyboardLayout) {
-        this.keyboardLayout = keyboardLayout;
     }
 
     public boolean isCommandModeToggle() {
