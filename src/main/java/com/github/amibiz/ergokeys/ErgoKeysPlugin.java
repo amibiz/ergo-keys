@@ -18,6 +18,7 @@ import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorFactory;
+import com.intellij.openapi.editor.actions.IncrementalFindAction;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
 import com.intellij.openapi.editor.event.EditorFactoryListener;
 import com.intellij.openapi.keymap.Keymap;
@@ -145,7 +146,8 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                 LOG.debug("beforeActionPerformed: action.class=", action.getClass());
 
                 if (action.getClass().equals(SearchEverywhereAction.class) ||
-                        action.getClass().equals(RunAnythingAction.class)) {
+                        action.getClass().equals(RunAnythingAction.class) ||
+                        action.getClass().equals(IncrementalFindAction.class)) {
                     final Editor editor = dataContext.getData(CommonDataKeys.EDITOR);
                     activateInsertMode(editor);
                 }
