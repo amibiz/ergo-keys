@@ -6,28 +6,25 @@
 
 package com.github.amibiz.ergokeys;
 
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.util.TextRange;
 
 public class SelectStringAction extends AnAction {
+    final private ActionManager actionManager = ActionManager.getInstance();
+
     @Override
     public void actionPerformed(AnActionEvent e) {
-        // Get all the required data from data keys
         final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
+        final Document document = editor.getDocument();
+        final SelectionModel selectionModel = editor.getSelectionModel();
 
         while (true) {
-            AnAction action = ActionManager.getInstance().getAction("EditorSelectWord");
+            AnAction action = actionManager.getAction(IdeActions.ACTION_EDITOR_SELECT_WORD_AT_CARET);
             action.actionPerformed(e);
 
-            // Access document, caret, and selection
-            final Document document = editor.getDocument();
-            final SelectionModel selectionModel = editor.getSelectionModel();
             final int start = selectionModel.getSelectionStart();
             final int end = selectionModel.getSelectionEnd();
 

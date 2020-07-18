@@ -172,11 +172,13 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                         editor.getContentComponent().addFocusListener(new FocusListener() {
                             @Override
                             public void focusGained(FocusEvent focusEvent) {
+                                LOG.debug("focusGained: focusEvent=", focusEvent);
                                 editor.getSettings().setBlockCursor(inCommandMode());
                             }
 
                             @Override
                             public void focusLost(FocusEvent focusEvent) {
+                                LOG.debug("focusLost: focusEvent=", focusEvent);
                                 lastEditorUsed = editor;
                             }
                         });

@@ -17,10 +17,11 @@ public class EndOfLineOrParagraphAction extends AnAction {
         final CaretModel caretModel = editor.getCaretModel();
         final Caret caret = caretModel.getCurrentCaret();
 
+        String ideActionId = IdeActions.ACTION_EDITOR_MOVE_LINE_END;
         if (DocumentUtil.isAtLineEnd(caret.getOffset(), document)) {
-            actionManager.getAction(IdeActions.ACTION_EDITOR_FORWARD_PARAGRAPH).actionPerformed(e);
-        } else {
-            actionManager.getAction(IdeActions.ACTION_EDITOR_MOVE_LINE_END).actionPerformed(e);
+            ideActionId = IdeActions.ACTION_EDITOR_FORWARD_PARAGRAPH;
         }
+
+        actionManager.getAction(ideActionId).actionPerformed(e);
     }
 }

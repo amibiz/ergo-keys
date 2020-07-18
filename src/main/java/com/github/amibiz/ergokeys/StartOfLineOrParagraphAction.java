@@ -17,10 +17,11 @@ public class StartOfLineOrParagraphAction extends AnAction {
         final CaretModel caretModel = editor.getCaretModel();
         final Caret caret = caretModel.getCurrentCaret();
 
+        String ideActionId = IdeActions.ACTION_EDITOR_MOVE_LINE_START;
         if (DocumentUtil.isAtLineStart(caret.getOffset(), document)) {
-            actionManager.getAction(IdeActions.ACTION_EDITOR_BACKWARD_PARAGRAPH).actionPerformed(e);
-        } else {
-            actionManager.getAction(IdeActions.ACTION_EDITOR_MOVE_LINE_START).actionPerformed(e);
+            ideActionId = IdeActions.ACTION_EDITOR_BACKWARD_PARAGRAPH;
         }
+
+        actionManager.getAction(ideActionId).actionPerformed(e);
     }
 }
