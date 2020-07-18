@@ -6,12 +6,12 @@
 
 package com.github.amibiz.ergokeys;
 
+import com.intellij.ide.actions.SearchEverywhereAction;
+import com.intellij.ide.actions.runAnything.RunAnythingAction;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.Disposable;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.Shortcut;
+import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ex.AnActionListener;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ApplicationComponent;
@@ -139,6 +139,28 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             }
         });
 
+        ApplicationManager.getApplication().getMessageBus().connect().subscribe(AnActionListener.TOPIC, new AnActionListener() {
+            @Override
+            public void beforeActionPerformed(@NotNull AnAction action, @NotNull DataContext dataContext, @NotNull AnActionEvent event) {
+                LOG.debug("beforeActionPerformed: action.class=", action.getClass());
+
+                if (action.getClass().equals(SearchEverywhereAction.class) ||
+                        action.getClass().equals(RunAnythingAction.class)) {
+                    final Editor editor = dataContext.getData(CommonDataKeys.EDITOR);
+                    activateInsertMode(editor);
+                }
+            }
+
+            @Override
+            public void afterActionPerformed(@NotNull AnAction action, @NotNull DataContext dataContext, @NotNull AnActionEvent event) {
+                LOG.debug("afterActionPerformed: action.class=", action.getClass());
+            }
+
+            @Override
+            public void beforeEditorTyping(char c, @NotNull DataContext dataContext) {
+                LOG.debug("beforeEditorTyping: c=", c);
+            }
+        });
 
         EditorFactory.getInstance().addEditorFactoryListener(
                 new EditorFactoryListener() {
