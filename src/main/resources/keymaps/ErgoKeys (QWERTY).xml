@@ -87,6 +87,10 @@
     <action id="EditorToggleStickySelection">
         <keyboard-shortcut first-keystroke="T"/>
     </action>
+    <action id="$SelectAll">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="A"/>
+    </action>
     <action id="EditorSelectLine">
         <keyboard-shortcut first-keystroke="2"/>
         <keyboard-shortcut first-keystroke="7"/>
