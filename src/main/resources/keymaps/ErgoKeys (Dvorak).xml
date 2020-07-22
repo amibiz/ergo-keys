@@ -155,7 +155,7 @@
     <action id="SplitVertically">
         <keyboard-shortcut first-keystroke="4"/>
     </action>
-    <action id="ErgoKeysFindInPathAction">
+    <action id="FindInPath">
         <keyboard-shortcut first-keystroke="SPACE"
                            second-keystroke="B"/>
     </action>

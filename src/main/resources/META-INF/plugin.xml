@@ -20,7 +20,7 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <!--&lt;!&ndash; please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description &ndash;&gt;-->
-    <idea-version since-build="183"/>
+    <idea-version since-build="183.3" until-build="201.*"/>
 
     <change-notes><![CDATA[
     <b>1.9</b><br/>
@@ -85,9 +85,5 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
                 class="com.github.amibiz.ergokeys.GotoAction"
                 text="GotoAction"
                 description="GotoAction"/>
-        <action id="ErgoKeysFindInPathAction"
-                class="com.github.amibiz.ergokeys.FindInPathAction"
-                text="FindInPath"
-                description="FindInPath"/>
     </actions>
 </idea-plugin>

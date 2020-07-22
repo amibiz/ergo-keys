@@ -6,6 +6,7 @@
 
 package com.github.amibiz.ergokeys;
 
+import com.intellij.find.actions.FindInPathAction;
 import com.intellij.ide.actions.SearchEverywhereAction;
 import com.intellij.ide.actions.runAnything.RunAnythingAction;
 import com.intellij.ide.util.PropertiesComponent;
@@ -147,7 +148,8 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
                 if (action.getClass().equals(SearchEverywhereAction.class) ||
                         action.getClass().equals(RunAnythingAction.class) ||
-                        action.getClass().equals(IncrementalFindAction.class)) {
+                        action.getClass().equals(IncrementalFindAction.class) ||
+                        action.getClass().equals(FindInPathAction.class)) {
                     final Editor editor = dataContext.getData(CommonDataKeys.EDITOR);
                     activateInsertMode(editor);
                 }
