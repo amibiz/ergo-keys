@@ -10,9 +10,10 @@ import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.util.TextRange;
 
-public class SelectStringAction extends AnAction {
+public class SelectStringAction extends DumbAwareAction {
     final private ActionManager actionManager = ActionManager.getInstance();
 
     @Override

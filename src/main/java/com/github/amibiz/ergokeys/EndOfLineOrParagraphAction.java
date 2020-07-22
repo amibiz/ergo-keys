@@ -1,13 +1,17 @@
 package com.github.amibiz.ergokeys;
 
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.util.DocumentUtil;
 
-public class EndOfLineOrParagraphAction extends AnAction {
+public class EndOfLineOrParagraphAction extends DumbAwareAction {
     final private ActionManager actionManager = ActionManager.getInstance();
 
     @Override
