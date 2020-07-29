@@ -53,6 +53,7 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
         <bundledKeymap file="$ergokeys.xml"/>
         <bundledKeymap file="ErgoKeys (QWERTY).xml"/>
         <bundledKeymap file="ErgoKeys (Dvorak).xml"/>
+        <bundledKeymap file="ErgoKeys (Programmer Dvorak).xml"/>
     </extensions>
 
     <actions>

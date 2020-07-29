@@ -1,0 +1,33 @@
+<keymap version="1" name="ErgoKeys (Programmer Dvorak)" parent="ErgoKeys (Dvorak)">
+
+    <!-- Selection -->
+    <action id="EditorSelectLine">
+        <keyboard-shortcut first-keystroke="OPEN_BRACKET"/>
+        <keyboard-shortcut first-keystroke="MULTIPLY"/>
+    </action>
+    <action id="EditorSelectWord">
+        <keyboard-shortcut first-keystroke="AMPERSAND"/>
+        <keyboard-shortcut first-keystroke="RIGHT_PARENTHESIS"/>
+    </action>
+    <action id="ErgoKeysSelectString">
+        <keyboard-shortcut first-keystroke="PLUS"/>
+    </action>
+    <action id="SelectNextOccurrence">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="RIGHT_PARENTHESIS"/>
+    </action>
+
+    <!-- Modification -->
+    <action id="$Delete">
+        <keyboard-shortcut first-keystroke="LEFT_PARENTHESIS"/>
+    </action>
+
+    <!-- Miscellaneous  -->
+    <action id="UnsplitAll">
+        <keyboard-shortcut first-keystroke="BRACELEFT"/>
+    </action>
+    <action id="SplitVertically">
+        <keyboard-shortcut first-keystroke="BRACERIGHT"/>
+    </action>
+
+</keymap>
