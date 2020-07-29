@@ -12,8 +12,8 @@
     Inspired by <a href="https://github.com/xahlee/xah-fly-keys">xah-fly-keys</a>, independently implemented as a plugin for IntelliJ.
     <br>
     <br>
-    <pre>Alt-Space    activate <i>Command Mode</i>
-Shift-Space  activate <i>Command Mode</i>
+    <pre>Shift-Space  activate <i>Command Mode</i>
+Alt-Space    activate <i>Command Mode</i>
 
 F (qwerty)   activate <i>Insert Mode</i>
 U (dvorak)   activate <i>Insert Mode</i></pre>
@@ -23,11 +23,13 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     <idea-version since-build="183.3" until-build="201.*"/>
 
     <change-notes><![CDATA[
-    <b>1.9</b><br/>
+    <b>1.10</b><br/>
     <ul>
-        <li>support custom key binding for CMD mode</li>
-        <li>fix search everywhere and run anything keys bound to CMD mode</li>
-        <li>bind [Space] + A -> select all</li>
+        <li>update IntelliJ support to 202.*</li>
+        <li>support invoking plugin actions while updating indices</li>
+        <li>visualize CMD mode in README</li>
+        <li>add "Programmer Dvorak" keymap</li>
+        <li>fixed keys bound to CMD mode in some actions</li>
     </ul>
     ]]></change-notes>
 
