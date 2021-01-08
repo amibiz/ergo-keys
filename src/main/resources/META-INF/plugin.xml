@@ -23,13 +23,9 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     <idea-version since-build="183.3" until-build="201.*"/>
 
     <change-notes><![CDATA[
-    <b>1.10</b><br/>
+    <b>1.11</b><br/>
     <ul>
-        <li>update IntelliJ support to 202.*</li>
-        <li>support invoking plugin actions while updating indices</li>
-        <li>visualize CMD mode in README</li>
-        <li>add "Programmer Dvorak" keymap</li>
-        <li>fixed keys bound to CMD mode in some actions</li>
+        <li>update IntelliJ support to 203.*</li>
     </ul>
     ]]></change-notes>
 

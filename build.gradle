@@ -4,9 +4,10 @@ plugins {
 }
 
 group 'com.github.amibiz'
-version '1.10'
+version '1.11'
 
-sourceCompatibility = 1.8
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
 
 repositories {
     mavenCentral()
@@ -19,10 +20,10 @@ dependencies {
 intellij {
     plugins 'java'
 //    version '2019.3'
-    version '2020.2'
+    version '2020.3'
 }
 
 patchPluginXml {
     sinceBuild '183.3'
-    untilBuild '202.*'
+    untilBuild '203.*'
 }
