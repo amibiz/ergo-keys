@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.amibiz'
-version '1.12'
+version '1.13.212'
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
@@ -14,16 +14,15 @@ repositories {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'junit', name: 'junit', version: '4.13.2'
 }
 
 intellij {
     plugins 'java'
-//    version '2019.3'
-    version '2021.1'
+    version '2021.2'
 }
 
 patchPluginXml {
-    sinceBuild '183.3'
-    untilBuild '211.*'
+    sinceBuild '212'
+    untilBuild '212.*'
 }

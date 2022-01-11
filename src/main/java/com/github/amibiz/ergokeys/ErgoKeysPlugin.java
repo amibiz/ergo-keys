@@ -13,6 +13,7 @@ import com.intellij.ide.actions.runAnything.RunAnythingAction;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ex.ActionUtil;
 import com.intellij.openapi.actionSystem.ex.AnActionListener;
 import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
@@ -173,6 +174,11 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                     @Override
                     public void editorCreated(@NotNull EditorFactoryEvent event) {
                         Editor editor = event.getEditor();
+
+                        // Enable character based shortcuts (disabled by default since 2021.2)
+                        // for newly created editors.
+                        editor.getContentComponent().putClientProperty(ActionUtil.ALLOW_PlAIN_LETTER_SHORTCUTS, true);
+
                         editor.getContentComponent().addFocusListener(new FocusListener() {
                             @Override
                             public void focusGained(FocusEvent focusEvent) {
