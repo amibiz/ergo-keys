@@ -23,9 +23,9 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     <idea-version since-build="212"/>
 
     <change-notes><![CDATA[
-    <b>1.13.213</b><br/>
+    <b>1.13.222</b><br/>
     <ul>
-        <li>update IntelliJ support to 213.* and forward</li>
+        <li>update IntelliJ support to 222.* and forward</li>
     </ul>
     ]]></change-notes>
 
