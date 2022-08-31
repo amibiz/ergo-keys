@@ -19,7 +19,7 @@ dependencies {
 
 intellij {
     plugins = ['java']
-    version = '2021.3'
+    version = '2022.2'
 }
 
 patchPluginXml {
