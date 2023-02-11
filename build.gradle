@@ -1,10 +1,10 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '1.8.1'
+    id 'org.jetbrains.intellij' version '1.13.0'
 }
 
 group 'com.github.amibiz'
-version '1.13.222'
+version '1.13.223'
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
@@ -19,10 +19,10 @@ dependencies {
 
 intellij {
     plugins = ['java']
-    version = '2022.2'
+    version = '2022.3'
 }
 
 patchPluginXml {
     sinceBuild = '212'
-    untilBuild = '222.*'
+    untilBuild = '223.*'
 }

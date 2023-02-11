@@ -58,6 +58,14 @@ public class ErgoKeysPlugin implements ApplicationComponent {
         application = ApplicationManager.getApplication();
         keymapManagerEx = KeymapManagerEx.getInstanceEx();
         propertiesComponent = PropertiesComponent.getInstance();
+
+        ActionManager.getInstance().registerAction("ErgoKeysNoopAction", new AnAction() {
+            @Override
+            public void actionPerformed(AnActionEvent e) {
+                // noop
+            }
+        });
+
     }
 
     @Override
@@ -110,13 +118,6 @@ public class ErgoKeysPlugin implements ApplicationComponent {
         this.storePersistentProperty("commandModeKeymapName", commandModeKeymap.getName());
 
         extendCommandModeShortcuts(insertModeKeymap);
-
-        ActionManager.getInstance().registerAction("ErgoKeysNoopAction", new AnAction() {
-            @Override
-            public void actionPerformed(AnActionEvent e) {
-                // noop
-            }
-        });
 
         application.getMessageBus().connect().subscribe(KeymapManagerListener.TOPIC, new KeymapManagerListener() {
 
