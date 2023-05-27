@@ -23,10 +23,10 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     <idea-version since-build="212"/>
 
     <change-notes><![CDATA[
-    <b>1.13.231</b><br/>
+    <b>1.14.231</b><br/>
     <ul>
-        <li>update IntelliJ support to 231.* and forward</li>
-    </ul>
+        <li>Activate INS mode when switching to builtin terminal<li>
+    </ul
     ]]></change-notes>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
@@ -57,18 +57,18 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     <actions>
         <!-- Add your actions here -->
         <action id="ErgoKeysCommandMode" class="com.github.amibiz.ergokeys.CommandModeAction" text="Command Mode"
-                description="Activate Command Mode">
+                description="Activate command mode">
             <keyboard-shortcut keymap="$default" first-keystroke="alt SPACE"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift SPACE"/>
         </action>
         <action id="ErgoKeysInsertMode" class="com.github.amibiz.ergokeys.InsertModeAction" text="Insert Mode"
-                description="Activate Insert Mode"/>
+                description="Activate insert mode"/>
         <action id="ErgoKeysSelectString" class="com.github.amibiz.ergokeys.SelectStringAction" text="Select String"
-                description="Select String"/>
+                description="Select string"/>
         <action id="ErgoKeysStartOfLineOrParagraphAction"
                 class="com.github.amibiz.ergokeys.StartOfLineOrParagraphAction"
                 text="Move Caret to Line or Block Start"
-                description="Move Caret to Line or Block Start"/>
+                description="Move caret to line or block start"/>
         <action id="ErgoKeysEndOfLineOrParagraphAction"
                 class="com.github.amibiz.ergokeys.EndOfLineOrParagraphAction" text="EndOfLineOrParagraphAction"
                 description="EndOfLineOrParagraphAction"/>

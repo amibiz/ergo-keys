@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.amibiz'
-version '1.13.231'
+version '1.14.231'
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"

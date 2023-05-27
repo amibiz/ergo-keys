@@ -106,7 +106,6 @@ public class ErgoKeysPlugin implements ApplicationComponent {
         String commandModeKeymapName = this.loadPersistentProperty("commandModeKeymapName");
         if (commandModeKeymapName == null) {
             commandModeKeymap = keymapManagerEx.getKeymap(DEFAULT_ERGOKEYS_KEYMAP);
-            ;
             assert commandModeKeymap != null;
         } else {
             commandModeKeymap = keymapManagerEx.getKeymap(commandModeKeymapName);
@@ -190,6 +189,11 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                             @Override
                             public void focusLost(FocusEvent focusEvent) {
                                 LOG.debug("focusLost: focusEvent=", focusEvent);
+
+                                if (focusEvent.getOppositeComponent() != null &&
+                                        focusEvent.getOppositeComponent().getClass().getName().equals("com.intellij.terminal.JBTerminalPanel")) {
+                                    setActiveKeymap(insertModeKeymap);
+                                }
                                 lastEditorUsed = editor;
                             }
                         });
@@ -221,7 +225,11 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
     public void activateInsertMode(Editor editor) {
         editor.getSettings().setBlockCursor(false);
-        this.keymapManagerEx.setActiveKeymap(insertModeKeymap);
+        this.setActiveKeymap(insertModeKeymap);
+    }
+
+    public void setActiveKeymap(@NotNull Keymap keymap) {
+        this.keymapManagerEx.setActiveKeymap(keymap);
     }
 
     private String persistentPropertyName(String key) {
