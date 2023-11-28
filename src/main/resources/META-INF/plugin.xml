@@ -20,7 +20,7 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <!--&lt;!&ndash; please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description &ndash;&gt;-->
-    <idea-version since-build="212"/>
+    <idea-version since-build="213"/>
 
     <change-notes><![CDATA[
     <b>1.14.232</b><br/>

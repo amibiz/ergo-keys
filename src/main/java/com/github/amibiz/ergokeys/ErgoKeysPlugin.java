@@ -145,22 +145,28 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
         ApplicationManager.getApplication().getMessageBus().connect().subscribe(AnActionListener.TOPIC, new AnActionListener() {
             @Override
-            public void beforeActionPerformed(@NotNull AnAction action, @NotNull DataContext dataContext, @NotNull AnActionEvent event) {
-                LOG.debug("beforeActionPerformed: action.class=", action.getClass());
+            public void beforeActionPerformed(@NotNull AnAction action, @NotNull AnActionEvent event) {
+                LOG.debug("beforeActionPerformed:", action, event);
 
                 if (action.getClass().equals(SearchEverywhereAction.class) ||
                         action.getClass().equals(RunAnythingAction.class) ||
                         action.getClass().equals(IncrementalFindAction.class) ||
                         action.getClass().equals(FindInPathAction.class) ||
                         action.getClass().equals(ViewStructureAction.class)) {
-                    final Editor editor = dataContext.getData(CommonDataKeys.EDITOR);
-                    activateInsertMode(editor);
+                    final Editor editor = event.getDataContext().getData(CommonDataKeys.EDITOR);
+                    if (editor != null) {
+                        activateInsertMode(editor);
+                    }
                 }
+
+                AnActionListener.super.beforeActionPerformed(action, event);
             }
 
             @Override
-            public void afterActionPerformed(@NotNull AnAction action, @NotNull DataContext dataContext, @NotNull AnActionEvent event) {
-                LOG.debug("afterActionPerformed: action.class=", action.getClass());
+            public void afterActionPerformed(@NotNull AnAction action, @NotNull AnActionEvent event, @NotNull AnActionResult result) {
+                LOG.debug("afterActionPerformed:", action, event, result);
+
+                AnActionListener.super.afterActionPerformed(action, event, result);
             }
 
             @Override
