@@ -7,6 +7,7 @@
 package com.github.amibiz.ergokeys;
 
 import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
@@ -14,10 +15,13 @@ import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.util.TextRange;
 
 public class SelectStringAction extends DumbAwareAction {
+    private static final Logger LOG = Logger.getInstance(ErgoKeysPlugin.class);
     final private ActionManager actionManager = ActionManager.getInstance();
 
     @Override
     public void actionPerformed(AnActionEvent e) {
+        LOG.debug("actionPerformed: event.getInputEvent=", e.getInputEvent());
+
         final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
         final Document document = editor.getDocument();
         final SelectionModel selectionModel = editor.getSelectionModel();

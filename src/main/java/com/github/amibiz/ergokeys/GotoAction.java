@@ -11,9 +11,12 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 
 public class GotoAction extends AnAction {
+    private static final Logger LOG = Logger.getInstance(ErgoKeysPlugin.class);
+
     private final ErgoKeysPlugin plugin;
 
     public GotoAction() {
@@ -22,6 +25,8 @@ public class GotoAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {
+        LOG.debug("actionPerformed: event.getInputEvent=", e.getInputEvent());
+
         // Get all the required data from data keys
         final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
 
