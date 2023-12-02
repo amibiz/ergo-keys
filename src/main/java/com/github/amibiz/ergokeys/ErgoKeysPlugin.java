@@ -147,7 +147,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
         ApplicationManager.getApplication().getMessageBus().connect().subscribe(AnActionListener.TOPIC, new AnActionListener() {
             @Override
             public void beforeActionPerformed(@NotNull AnAction action, @NotNull AnActionEvent event) {
-                LOG.debug("beforeActionPerformed:", action, event);
+                LOG.debug("beforeActionPerformed:", " action=", action.getClass(), " event=", event.getInputEvent());
 
                 if (action.getClass().equals(SearchEverywhereAction.class) ||
                         action.getClass().equals(RunAnythingAction.class) ||
@@ -166,7 +166,8 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
             @Override
             public void afterActionPerformed(@NotNull AnAction action, @NotNull AnActionEvent event, @NotNull AnActionResult result) {
-                LOG.debug("afterActionPerformed:", action, event, result);
+                LOG.debug("afterActionPerformed:", " action=", action.getClass(), " event=",
+                        event.getInputEvent(), " result=", result.getClass());
 
                 AnActionListener.super.afterActionPerformed(action, event, result);
             }
