@@ -206,9 +206,13 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                                 lastEditorUsed = editor;
                             }
                         });
+
+                        EditorFactoryListener.super.editorCreated(event);
                     }
 
+                    @Override
                     public void editorReleased(@NotNull EditorFactoryEvent event) {
+                        EditorFactoryListener.super.editorReleased(event);
                     }
                 },
                 new Disposable() {
