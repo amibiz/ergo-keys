@@ -62,7 +62,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
         ActionManager.getInstance().registerAction("ErgoKeysNoopAction", new AnAction() {
             @Override
-            public void actionPerformed(AnActionEvent e) {
+            public void actionPerformed(@NotNull AnActionEvent e) {
                 // noop
             }
         });
