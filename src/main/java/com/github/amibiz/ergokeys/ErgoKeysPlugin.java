@@ -49,10 +49,10 @@ public class ErgoKeysPlugin implements ApplicationComponent {
     private final KeymapManagerEx keymapManagerEx;
     private final PropertiesComponent propertiesComponent;
 
-    private Keymap insertModeKeymap;
-    private Keymap commandModeKeymap;
-
     private Editor lastEditorUsed;
+
+    private final ErgoKeysService service =
+            ApplicationManager.getApplication().getService(ErgoKeysService.class);
 
     public ErgoKeysPlugin() {
         settings = ErgoKeysSettings.getInstance();
@@ -94,30 +94,30 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
         String insertModeKeymapName = this.loadPersistentProperty("insertModeKeymapName");
         if (insertModeKeymapName == null) {
-            insertModeKeymap = keymapManagerEx.getActiveKeymap();
+            service.setInsertModeKeymap(keymapManagerEx.getActiveKeymap());
         } else {
-            insertModeKeymap = keymapManagerEx.getKeymap(insertModeKeymapName);
-            if (insertModeKeymap == null) {
-                insertModeKeymap = keymapManagerEx.getKeymap("$default");
-                assert insertModeKeymap != null;
+            service.setInsertModeKeymap(keymapManagerEx.getKeymap(insertModeKeymapName));
+            if (service.getInsertModeKeymap() == null) {
+                service.setInsertModeKeymap(keymapManagerEx.getKeymap("$default"));
+                assert service.getInsertModeKeymap() != null;
             }
         }
-        this.storePersistentProperty("insertModeKeymapName", insertModeKeymap.getName());
+        this.storePersistentProperty("insertModeKeymapName", service.getInsertModeKeymap().getName());
 
         String commandModeKeymapName = this.loadPersistentProperty("commandModeKeymapName");
         if (commandModeKeymapName == null) {
-            commandModeKeymap = keymapManagerEx.getKeymap(DEFAULT_ERGOKEYS_KEYMAP);
-            assert commandModeKeymap != null;
+            service.setCommandModeKeymap(keymapManagerEx.getKeymap(DEFAULT_ERGOKEYS_KEYMAP));
+            assert service.getCommandModeKeymap() != null;
         } else {
-            commandModeKeymap = keymapManagerEx.getKeymap(commandModeKeymapName);
-            if (commandModeKeymap == null) {
-                commandModeKeymap = keymapManagerEx.getKeymap(DEFAULT_ERGOKEYS_KEYMAP);
-                assert commandModeKeymap != null;
+            service.setCommandModeKeymap(keymapManagerEx.getKeymap(commandModeKeymapName));
+            if (service.getCommandModeKeymap() == null) {
+                service.setCommandModeKeymap(keymapManagerEx.getKeymap(DEFAULT_ERGOKEYS_KEYMAP));
+                assert service.getCommandModeKeymap() != null;
             }
         }
-        this.storePersistentProperty("commandModeKeymapName", commandModeKeymap.getName());
+        this.storePersistentProperty("commandModeKeymapName", service.getCommandModeKeymap().getName());
 
-        extendCommandModeShortcuts(insertModeKeymap);
+        extendCommandModeShortcuts(service.getInsertModeKeymap());
 
         application.getMessageBus().connect().subscribe(KeymapManagerListener.TOPIC, new KeymapManagerListener() {
 
@@ -125,19 +125,19 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             public void activeKeymapChanged(@Nullable Keymap keymap) {
                 LOG.debug("activeKeymapChanged: keymap " + keymap.getName());
 
-                if (keymap.equals(commandModeKeymap) || keymap.equals(insertModeKeymap)) {
+                if (keymap.equals(service.getCommandModeKeymap()) || keymap.equals(service.getInsertModeKeymap())) {
                     return;
                 }
 
                 String key;
                 if (isErgoKeysKeymap(keymap)) {
-                    commandModeKeymap = keymap;
+                    service.setCommandModeKeymap(keymap);
                     key = "commandModeKeymapName";
                 } else {
-                    purgeCommandModeShortcuts(insertModeKeymap);
-                    insertModeKeymap = keymap;
+                    purgeCommandModeShortcuts(service.getInsertModeKeymap());
+                    service.setInsertModeKeymap(keymap);
                     key = "insertModeKeymapName";
-                    extendCommandModeShortcuts(insertModeKeymap);
+                    extendCommandModeShortcuts(service.getInsertModeKeymap());
                     activateInsertMode(lastEditorUsed);
                 }
                 storePersistentProperty(key, keymap.getName());
@@ -201,7 +201,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
                                 if (focusEvent.getOppositeComponent() != null &&
                                         focusEvent.getOppositeComponent().getClass().getName().equals("com.intellij.terminal.JBTerminalPanel")) {
-                                    setActiveKeymap(insertModeKeymap);
+                                    setActiveKeymap(service.getInsertModeKeymap());
                                 }
                                 lastEditorUsed = editor;
                             }
@@ -233,12 +233,12 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             return;
         }
         editor.getSettings().setBlockCursor(true);
-        this.keymapManagerEx.setActiveKeymap(commandModeKeymap);
+        this.keymapManagerEx.setActiveKeymap(service.getCommandModeKeymap());
     }
 
     public void activateInsertMode(Editor editor) {
         editor.getSettings().setBlockCursor(false);
-        this.setActiveKeymap(insertModeKeymap);
+        this.setActiveKeymap(service.getInsertModeKeymap());
     }
 
     public void setActiveKeymap(@NotNull Keymap keymap) {
