@@ -49,8 +49,6 @@ public class ErgoKeysPlugin implements ApplicationComponent {
     private final KeymapManagerEx keymapManagerEx;
     private final PropertiesComponent propertiesComponent;
 
-    private Editor lastEditorUsed;
-
     private final ErgoKeysService service =
             ApplicationManager.getApplication().getService(ErgoKeysService.class);
 
@@ -138,7 +136,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                     service.setInsertModeKeymap(keymap);
                     key = "insertModeKeymapName";
                     extendCommandModeShortcuts(service.getInsertModeKeymap());
-                    activateInsertMode(lastEditorUsed);
+                    activateInsertMode(service.getLastEditorUsed());
                 }
                 storePersistentProperty(key, keymap.getName());
             }
@@ -203,7 +201,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                                         focusEvent.getOppositeComponent().getClass().getName().equals("com.intellij.terminal.JBTerminalPanel")) {
                                     setActiveKeymap(service.getInsertModeKeymap());
                                 }
-                                lastEditorUsed = editor;
+                                service.setLastEditorUsed(editor);
                             }
                         });
 
