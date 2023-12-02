@@ -11,7 +11,6 @@ import com.intellij.ide.actions.SearchEverywhereAction;
 import com.intellij.ide.actions.Switcher;
 import com.intellij.ide.actions.ViewStructureAction;
 import com.intellij.ide.actions.runAnything.RunAnythingAction;
-import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.ex.ActionUtil;
@@ -40,14 +39,12 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
     private static final Logger LOG = Logger.getInstance(ErgoKeysPlugin.class);
 
-    private static final String PLUGIN_ID = "com.github.amibiz.ergokeys";
     private static final String ROOT_ERGOKEYS_KEYMAP = "$ergokeys";
     private static final String DEFAULT_ERGOKEYS_KEYMAP = "ErgoKeys (QWERTY)";
 
     private final ErgoKeysSettings settings;
     private final Application application;
     private final KeymapManagerEx keymapManagerEx;
-    private final PropertiesComponent propertiesComponent;
 
     private final ErgoKeysService service =
             ApplicationManager.getApplication().getService(ErgoKeysService.class);
@@ -56,7 +53,6 @@ public class ErgoKeysPlugin implements ApplicationComponent {
         settings = ErgoKeysSettings.getInstance();
         application = ApplicationManager.getApplication();
         keymapManagerEx = KeymapManagerEx.getInstanceEx();
-        propertiesComponent = PropertiesComponent.getInstance();
 
         ActionManager.getInstance().registerAction("ErgoKeysNoopAction", new AnAction() {
             @Override
@@ -90,7 +86,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
             keymap.getActionIdList();
         }
 
-        String insertModeKeymapName = this.loadPersistentProperty("insertModeKeymapName");
+        String insertModeKeymapName = service.loadPersistentProperty("insertModeKeymapName");
         if (insertModeKeymapName == null) {
             service.setInsertModeKeymap(keymapManagerEx.getActiveKeymap());
         } else {
@@ -100,9 +96,9 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                 assert service.getInsertModeKeymap() != null;
             }
         }
-        this.storePersistentProperty("insertModeKeymapName", service.getInsertModeKeymap().getName());
+        service.storePersistentProperty("insertModeKeymapName", service.getInsertModeKeymap().getName());
 
-        String commandModeKeymapName = this.loadPersistentProperty("commandModeKeymapName");
+        String commandModeKeymapName = service.loadPersistentProperty("commandModeKeymapName");
         if (commandModeKeymapName == null) {
             service.setCommandModeKeymap(keymapManagerEx.getKeymap(DEFAULT_ERGOKEYS_KEYMAP));
             assert service.getCommandModeKeymap() != null;
@@ -113,7 +109,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                 assert service.getCommandModeKeymap() != null;
             }
         }
-        this.storePersistentProperty("commandModeKeymapName", service.getCommandModeKeymap().getName());
+        service.storePersistentProperty("commandModeKeymapName", service.getCommandModeKeymap().getName());
 
         extendCommandModeShortcuts(service.getInsertModeKeymap());
 
@@ -138,7 +134,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                     extendCommandModeShortcuts(service.getInsertModeKeymap());
                     activateInsertMode(service.getLastEditorUsed());
                 }
-                storePersistentProperty(key, keymap.getName());
+                service.storePersistentProperty(key, keymap.getName());
             }
         });
 
@@ -241,18 +237,6 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
     public void setActiveKeymap(@NotNull Keymap keymap) {
         this.keymapManagerEx.setActiveKeymap(keymap);
-    }
-
-    private String persistentPropertyName(String key) {
-        return PLUGIN_ID + "." + key;
-    }
-
-    private String loadPersistentProperty(String key) {
-        return propertiesComponent.getValue(persistentPropertyName(key));
-    }
-
-    private void storePersistentProperty(String key, String value) {
-        propertiesComponent.setValue(persistentPropertyName(key), value);
     }
 
     private boolean inCommandMode() {
