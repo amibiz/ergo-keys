@@ -40,37 +40,48 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
                             serviceImplementation="com.github.amibiz.ergokeys.ErgoKeysSettings"/>
     </extensions>
 
-    <application-components>
-        <!-- Add your application components here -->
-        <component>
-            <implementation-class>com.github.amibiz.ergokeys.ErgoKeysPlugin</implementation-class>
-        </component>
-    </application-components>
-
     <extensions defaultExtensionNs="com.intellij">
         <bundledKeymap file="$ergokeys.xml"/>
         <bundledKeymap file="ErgoKeys (QWERTY).xml"/>
         <bundledKeymap file="ErgoKeys (Dvorak).xml"/>
         <bundledKeymap file="ErgoKeys (Programmer Dvorak).xml"/>
+
+        <editorFactoryListener implementation="com.github.amibiz.ergokeys.EditorCreatedListener"/>
     </extensions>
+
+    <applicationListeners>
+        <listener class="com.github.amibiz.ergokeys.AppStartedListener"
+                  topic="com.intellij.ide.AppLifecycleListener"/>
+        <listener class="com.github.amibiz.ergokeys.ActionListener"
+                  topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
+        <listener class="com.github.amibiz.ergokeys.ActiveKeymapChangedListener"
+                  topic="com.intellij.openapi.keymap.KeymapManagerListener"/>
+    </applicationListeners>
 
     <actions>
         <!-- Add your actions here -->
-        <action id="ErgoKeysCommandMode" class="com.github.amibiz.ergokeys.CommandModeAction" text="Command Mode"
+        <action id="ErgoKeysCommandMode"
+                class="com.github.amibiz.ergokeys.CommandModeAction"
+                text="Command Mode"
                 description="Activate command mode">
             <keyboard-shortcut keymap="$default" first-keystroke="alt SPACE"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift SPACE"/>
         </action>
-        <action id="ErgoKeysInsertMode" class="com.github.amibiz.ergokeys.InsertModeAction" text="Insert Mode"
+        <action id="ErgoKeysInsertMode"
+                class="com.github.amibiz.ergokeys.InsertModeAction"
+                text="Insert Mode"
                 description="Activate insert mode"/>
-        <action id="ErgoKeysSelectString" class="com.github.amibiz.ergokeys.SelectStringAction" text="Select String"
+        <action id="ErgoKeysSelectString"
+                class="com.github.amibiz.ergokeys.SelectStringAction"
+                text="Select String"
                 description="Select string"/>
         <action id="ErgoKeysStartOfLineOrParagraphAction"
                 class="com.github.amibiz.ergokeys.StartOfLineOrParagraphAction"
                 text="Move Caret to Line or Block Start"
                 description="Move caret to line or block start"/>
         <action id="ErgoKeysEndOfLineOrParagraphAction"
-                class="com.github.amibiz.ergokeys.EndOfLineOrParagraphAction" text="EndOfLineOrParagraphAction"
+                class="com.github.amibiz.ergokeys.EndOfLineOrParagraphAction"
+                text="EndOfLineOrParagraphAction"
                 description="EndOfLineOrParagraphAction"/>
         <action id="ErgoKeysDeleteCurrentCodeBlockAction"
                 class="com.github.amibiz.ergokeys.DeleteCurrentCodeBlockAction"

@@ -1,15 +1,22 @@
 package com.github.amibiz.ergokeys;
 
 import com.intellij.ide.util.PropertiesComponent;
+import com.intellij.openapi.actionSystem.Shortcut;
 import com.intellij.openapi.components.Service;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.ex.KeymapManagerEx;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public final class ErgoKeysService {
+    private static final Logger LOG = Logger.getInstance(ErgoKeysService.class);
+
     private static final String PLUGIN_ID = "com.github.amibiz.ergokeys";
 
     private static final String ROOT_ERGOKEYS_KEYMAP = "$ergokeys";
@@ -85,5 +92,32 @@ public final class ErgoKeysService {
             }
         }
         return false;
+    }
+
+    public Keymap[] getAllErgoKeysKeymaps() {
+        KeymapManagerEx keymapManagerEx = KeymapManagerEx.getInstanceEx();
+
+        List<Keymap> keymaps = new ArrayList<>();
+        for (Keymap keymap : keymapManagerEx.getAllKeymaps()) {
+            LOG.debug("getAllErgoKeysKeymaps: check keymap ", keymap);
+            if (isErgoKeysKeymap(keymap)) {
+                keymaps.add(keymap);
+            }
+        }
+        return keymaps.toArray(new Keymap[0]);
+    }
+
+    public void extendCommandModeShortcuts(@NotNull Keymap dst) {
+        for (Keymap keymap : this.getAllErgoKeysKeymaps()) {
+            this.extendShortcuts(keymap, dst);
+        }
+    }
+
+    private void extendShortcuts(@NotNull Keymap dst, Keymap src) {
+        for (String actionId : src.getActionIds()) {
+            for (Shortcut shortcut : src.getShortcuts(actionId)) {
+                dst.addShortcut(actionId, shortcut);
+            }
+        }
     }
 }
