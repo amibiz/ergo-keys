@@ -6,7 +6,6 @@
 
 package com.github.amibiz.ergokeys;
 
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.options.SearchableConfigurable;
 import org.jetbrains.annotations.Nls;
@@ -17,12 +16,10 @@ import javax.swing.*;
 
 public class ErgoKeysConfigurable implements SearchableConfigurable {
     private final ErgoKeysSettings settings;
-    private final ErgoKeysPlugin plugin;
     private ErgoKeysConfigurationPanel ui;
 
     public ErgoKeysConfigurable() {
         settings = ServiceManager.getService(ErgoKeysSettings.class);
-        plugin = ApplicationManager.getApplication().getComponent(ErgoKeysPlugin.class);
     }
 
     @NotNull
@@ -57,6 +54,5 @@ public class ErgoKeysConfigurable implements SearchableConfigurable {
     @Override
     public void apply() {
         settings.setCommandModeToggle(ui.isCommandModeToggle());
-        plugin.applySettings();
     }
 }
