@@ -39,7 +39,6 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
     private static final Logger LOG = Logger.getInstance(ErgoKeysPlugin.class);
 
-    private static final String ROOT_ERGOKEYS_KEYMAP = "$ergokeys";
     private static final String DEFAULT_ERGOKEYS_KEYMAP = "ErgoKeys (QWERTY)";
 
     private final ErgoKeysSettings settings;
@@ -124,7 +123,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                 }
 
                 String key;
-                if (isErgoKeysKeymap(keymap)) {
+                if (service.isErgoKeysKeymap(keymap)) {
                     service.setCommandModeKeymap(keymap);
                     key = "commandModeKeymapName";
                 } else {
@@ -132,7 +131,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                     service.setInsertModeKeymap(keymap);
                     key = "insertModeKeymapName";
                     extendCommandModeShortcuts(service.getInsertModeKeymap());
-                    activateInsertMode(service.getLastEditorUsed());
+                    service.activateInsertMode(service.getLastEditorUsed());
                 }
                 service.storePersistentProperty(key, keymap.getName());
             }
@@ -151,7 +150,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                         action.getClass().equals(Switcher.class)) {
                     final Editor editor = event.getDataContext().getData(CommonDataKeys.EDITOR);
                     if (editor != null) {
-                        activateInsertMode(editor);
+                        service.activateInsertMode(editor);
                     }
                 }
 
@@ -186,7 +185,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
                             @Override
                             public void focusGained(FocusEvent focusEvent) {
                                 LOG.debug("focusGained: focusEvent=", focusEvent);
-                                editor.getSettings().setBlockCursor(inCommandMode());
+                                editor.getSettings().setBlockCursor(service.inCommandMode());
                             }
 
                             @Override
@@ -195,7 +194,7 @@ public class ErgoKeysPlugin implements ApplicationComponent {
 
                                 if (focusEvent.getOppositeComponent() != null &&
                                         focusEvent.getOppositeComponent().getClass().getName().equals("com.intellij.terminal.JBTerminalPanel")) {
-                                    setActiveKeymap(service.getInsertModeKeymap());
+                                    service.setActiveKeymap(service.getInsertModeKeymap());
                                 }
                                 service.setLastEditorUsed(editor);
                             }
@@ -221,27 +220,6 @@ public class ErgoKeysPlugin implements ApplicationComponent {
     public void applySettings() {
     }
 
-    public void activateCommandMode(Editor editor) {
-        if (settings.isCommandModeToggle() && inCommandMode()) {
-            activateInsertMode(editor);
-            return;
-        }
-        editor.getSettings().setBlockCursor(true);
-        this.keymapManagerEx.setActiveKeymap(service.getCommandModeKeymap());
-    }
-
-    public void activateInsertMode(Editor editor) {
-        editor.getSettings().setBlockCursor(false);
-        this.setActiveKeymap(service.getInsertModeKeymap());
-    }
-
-    public void setActiveKeymap(@NotNull Keymap keymap) {
-        this.keymapManagerEx.setActiveKeymap(keymap);
-    }
-
-    private boolean inCommandMode() {
-        return isErgoKeysKeymap(keymapManagerEx.getActiveKeymap());
-    }
 
     private void extendCommandModeShortcuts(@NotNull Keymap dst) {
         for (Keymap keymap : this.getAllErgoKeysKeymaps()) {
@@ -275,19 +253,10 @@ public class ErgoKeysPlugin implements ApplicationComponent {
         List<Keymap> keymaps = new ArrayList<>();
         for (Keymap keymap : this.keymapManagerEx.getAllKeymaps()) {
             LOG.debug("getAllErgoKeysKeymaps: check keymap ", keymap);
-            if (isErgoKeysKeymap(keymap)) {
+            if (service.isErgoKeysKeymap(keymap)) {
                 keymaps.add(keymap);
             }
         }
         return keymaps.toArray(new Keymap[0]);
-    }
-
-    private boolean isErgoKeysKeymap(@Nullable Keymap keymap) {
-        for (; keymap != null; keymap = keymap.getParent()) {
-            if (ROOT_ERGOKEYS_KEYMAP.equalsIgnoreCase(keymap.getName())) {
-                return true;
-            }
-        }
-        return false;
     }
 }

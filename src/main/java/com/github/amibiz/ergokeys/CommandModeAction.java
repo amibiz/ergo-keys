@@ -17,21 +17,19 @@ public class CommandModeAction extends DumbAwareAction {
 
     private static final Logger LOG = Logger.getInstance(CommandModeAction.class);
 
-    private final ErgoKeysPlugin plugin;
-
-    public CommandModeAction() {
-        plugin = ApplicationManager.getApplication().getComponent(ErgoKeysPlugin.class);
-    }
-
     @Override
     public void actionPerformed(AnActionEvent e) {
         LOG.debug("actionPerformed: event.getInputEvent=", e.getInputEvent());
+
+        ErgoKeysService service = ApplicationManager.
+                getApplication().
+                getService(ErgoKeysService.class);
 
         Editor editor = e.getData(CommonDataKeys.EDITOR);
         if (editor == null) {
             return;
         }
-        plugin.activateCommandMode(editor);
+        service.activateCommandMode(editor);
     }
 
 }

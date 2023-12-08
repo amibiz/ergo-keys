@@ -17,12 +17,6 @@ public class InsertModeAction extends DumbAwareAction {
 
     private static final Logger LOG = Logger.getInstance(InsertModeAction.class);
 
-    private final ErgoKeysPlugin plugin;
-
-    public InsertModeAction() {
-        this.plugin = ApplicationManager.getApplication().getComponent(ErgoKeysPlugin.class);
-    }
-
     @Override
     public void actionPerformed(AnActionEvent e) {
         LOG.debug("actionPerformed: event.getInputEvent=", e.getInputEvent());
@@ -31,6 +25,10 @@ public class InsertModeAction extends DumbAwareAction {
         if (editor == null) {
             return;
         }
-        plugin.activateInsertMode(editor);
+
+        ErgoKeysService service = ApplicationManager.
+                getApplication().
+                getService(ErgoKeysService.class);
+        service.activateInsertMode(editor);
     }
 }

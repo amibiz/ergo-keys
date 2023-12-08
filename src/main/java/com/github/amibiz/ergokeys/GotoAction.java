@@ -17,12 +17,6 @@ import com.intellij.openapi.editor.Editor;
 public class GotoAction extends AnAction {
     private static final Logger LOG = Logger.getInstance(GotoAction.class);
 
-    private final ErgoKeysPlugin plugin;
-
-    public GotoAction() {
-            this.plugin = ApplicationManager.getApplication().getComponent(ErgoKeysPlugin.class);
-    }
-
     @Override
     public void actionPerformed(AnActionEvent e) {
         LOG.debug("actionPerformed: event.getInputEvent=", e.getInputEvent());
@@ -30,7 +24,11 @@ public class GotoAction extends AnAction {
         // Get all the required data from data keys
         final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
 
-        this.plugin.activateInsertMode(editor);
+        ErgoKeysService service = ApplicationManager.
+                getApplication().
+                getService(ErgoKeysService.class);
+
+        service.activateInsertMode(editor);
 
         AnAction action = ActionManager.getInstance().getAction("GotoAction");
         action.actionPerformed(e);
