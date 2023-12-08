@@ -7,7 +7,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.DumbAwareAction;
 
 public class DeleteCurrentCodeBlockAction extends DumbAwareAction {
-    private static final Logger LOG = Logger.getInstance(ErgoKeysPlugin.class);
+    private static final Logger LOG = Logger.getInstance(DeleteCurrentCodeBlockAction.class);
 
     final private ActionManager actionManager = ActionManager.getInstance();
 

@@ -15,7 +15,7 @@ import com.intellij.openapi.project.DumbAwareAction;
 
 public class CommandModeAction extends DumbAwareAction {
 
-    private static final Logger LOG = Logger.getInstance(ErgoKeysPlugin.class);
+    private static final Logger LOG = Logger.getInstance(CommandModeAction.class);
 
     private final ErgoKeysPlugin plugin;
 

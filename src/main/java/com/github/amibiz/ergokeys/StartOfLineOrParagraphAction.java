@@ -13,7 +13,7 @@ import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.util.DocumentUtil;
 
 public class StartOfLineOrParagraphAction extends DumbAwareAction {
-    private static final Logger LOG = Logger.getInstance(ErgoKeysPlugin.class);
+    private static final Logger LOG = Logger.getInstance(StartOfLineOrParagraphAction.class);
 
     final private ActionManager actionManager = ActionManager.getInstance();
 

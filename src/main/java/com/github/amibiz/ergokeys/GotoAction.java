@@ -15,7 +15,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 
 public class GotoAction extends AnAction {
-    private static final Logger LOG = Logger.getInstance(ErgoKeysPlugin.class);
+    private static final Logger LOG = Logger.getInstance(GotoAction.class);
 
     private final ErgoKeysPlugin plugin;
 

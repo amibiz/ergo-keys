@@ -13,7 +13,7 @@ import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 
 public class ActivateInsertModeSpaceBeforeAction extends DumbAwareAction {
-    private static final Logger LOG = Logger.getInstance(ErgoKeysPlugin.class);
+    private static final Logger LOG = Logger.getInstance(ActivateInsertModeSpaceBeforeAction.class);
     final private ActionManager actionManager = ActionManager.getInstance();
 
     @Override
