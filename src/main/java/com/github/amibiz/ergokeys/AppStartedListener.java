@@ -7,14 +7,10 @@
 package com.github.amibiz.ergokeys;
 
 import com.intellij.ide.AppLifecycleListener;
-import com.intellij.openapi.actionSystem.ActionManager;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.ex.KeymapManagerEx;
-import org.jetbrains.annotations.NotNull;
 
 public class AppStartedListener implements AppLifecycleListener {
     private static final Logger LOG = Logger.getInstance(AppStartedListener.class);
@@ -30,13 +26,6 @@ public class AppStartedListener implements AppLifecycleListener {
         ErgoKeysService service = ApplicationManager.
                 getApplication().
                 getService(ErgoKeysService.class);
-
-        ActionManager.getInstance().registerAction("ErgoKeysNoopAction", new AnAction() {
-            @Override
-            public void actionPerformed(@NotNull AnActionEvent e) {
-                // noop
-            }
-        });
 
         // NOTE: we use the keymap parent relationship to extend derived
         // shortcuts and to identify command mode keymaps. at this stage,
