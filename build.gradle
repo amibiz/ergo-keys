@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'com.github.amibiz'
-version '1.14.232'
+version '1.15'
 
 java {
     sourceCompatibility = "11"
