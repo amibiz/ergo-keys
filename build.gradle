@@ -6,8 +6,10 @@ plugins {
 group 'com.github.amibiz'
 version '1.14.232'
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
+java {
+    sourceCompatibility = "11"
+    targetCompatibility = "11"
+}
 
 repositories {
     mavenCentral()
