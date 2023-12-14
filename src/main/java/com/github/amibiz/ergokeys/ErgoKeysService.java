@@ -6,6 +6,7 @@ import com.intellij.openapi.components.Service;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.keymap.Keymap;
+import com.intellij.openapi.keymap.KeymapManager;
 import com.intellij.openapi.keymap.ex.KeymapManagerEx;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -20,6 +21,9 @@ public final class ErgoKeysService {
     private static final String PLUGIN_ID = "com.github.amibiz.ergokeys";
 
     private static final String ROOT_ERGOKEYS_KEYMAP = "$ergokeys";
+    public static final String INSERT_MODE_KEYMAP_PERSISTENT_PROPERTY_NAME = "insertModeKeymapName";
+    public static final String COMMAND_MODE_KEYMAP_PERSISTENT_PROPERTY_NAME = "commandModeKeymapName";
+    private static final String DEFAULT_ERGOKEYS_KEYMAP = "ErgoKeys (QWERTY)";
 
     private final PropertiesComponent propertiesComponent = PropertiesComponent.getInstance();
 
@@ -40,6 +44,22 @@ public final class ErgoKeysService {
     }
 
     public Keymap getInsertModeKeymap() {
+        if (insertModeKeymap == null) {
+            KeymapManagerEx keymapManagerEx = KeymapManagerEx.getInstanceEx();
+
+            String insertModeKeymapName = loadPersistentProperty(INSERT_MODE_KEYMAP_PERSISTENT_PROPERTY_NAME);
+            if (insertModeKeymapName == null) {
+                setInsertModeKeymap(keymapManagerEx.getActiveKeymap());
+            } else {
+                setInsertModeKeymap(keymapManagerEx.getKeymap(insertModeKeymapName));
+                if (getInsertModeKeymap() == null) {
+                    setInsertModeKeymap(keymapManagerEx.getKeymap(KeymapManager.DEFAULT_IDEA_KEYMAP));
+                    assert getInsertModeKeymap() != null;
+                }
+            }
+            storePersistentProperty(INSERT_MODE_KEYMAP_PERSISTENT_PROPERTY_NAME, getInsertModeKeymap().getName());
+        }
+
         return insertModeKeymap;
     }
 
@@ -48,6 +68,22 @@ public final class ErgoKeysService {
     }
 
     public Keymap getCommandModeKeymap() {
+        if (commandModeKeymap == null) {
+            KeymapManagerEx keymapManagerEx = KeymapManagerEx.getInstanceEx();
+
+            String commandModeKeymapName = loadPersistentProperty(COMMAND_MODE_KEYMAP_PERSISTENT_PROPERTY_NAME);
+            if (commandModeKeymapName == null) {
+                setCommandModeKeymap(keymapManagerEx.getKeymap(DEFAULT_ERGOKEYS_KEYMAP));
+                assert getCommandModeKeymap() != null;
+            } else {
+                setCommandModeKeymap(keymapManagerEx.getKeymap(commandModeKeymapName));
+                if (getCommandModeKeymap() == null) {
+                    setCommandModeKeymap(keymapManagerEx.getKeymap(DEFAULT_ERGOKEYS_KEYMAP));
+                    assert getCommandModeKeymap() != null;
+                }
+            }
+            storePersistentProperty(COMMAND_MODE_KEYMAP_PERSISTENT_PROPERTY_NAME, getCommandModeKeymap().getName());
+        }
         return commandModeKeymap;
     }
 

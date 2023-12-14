@@ -50,8 +50,6 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.amibiz.ergokeys.AppStartedListener"
-                  topic="com.intellij.ide.AppLifecycleListener"/>
         <listener class="com.github.amibiz.ergokeys.ActionListener"
                   topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
         <listener class="com.github.amibiz.ergokeys.ActiveKeymapChangedListener"

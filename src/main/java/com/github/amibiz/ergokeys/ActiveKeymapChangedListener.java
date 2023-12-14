@@ -11,9 +11,23 @@ import org.jetbrains.annotations.Nullable;
 public class ActiveKeymapChangedListener implements KeymapManagerListener {
     private static final Logger LOG = Logger.getInstance(ActiveKeymapChangedListener.class);
 
+    private boolean firstTime = true;
     @Override
     public void activeKeymapChanged(@Nullable Keymap keymap) {
         LOG.debug("activeKeymapChanged: keymap=", keymap != null ? keymap.getName() : "null");
+
+        // When activeKeymapChanged() is called for the first time,
+        // calling KeymapManagerEx.getInstanceEx() causes PluginException
+        // with "Cyclic service initialization" error.
+        // Because we are calling ErgoKeysService.getInsertModeKeymap() and
+        // that method calls KeymapManagerEx we get the exception above.
+        // The solution is not to handle the first time activeKeymapChanged()
+        // is called.
+        if (firstTime) {
+            LOG.debug("activeKeymapChanged: first call");
+            firstTime = false;
+            return;
+        }
 
         ErgoKeysService service = ApplicationManager.
                 getApplication().
