@@ -1,5 +1,6 @@
 package com.github.amibiz.ergokeys;
 
+import com.github.amibiz.ergokeys.settings.ErgoKeysSettingsState;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.Shortcut;
 import com.intellij.openapi.components.Service;
@@ -113,7 +114,8 @@ public final class ErgoKeysService {
     }
 
     public void activateCommandMode(Editor editor) {
-        if (ErgoKeysSettings.getInstance().isCommandModeToggle() && this.inCommandMode()) {
+        ErgoKeysSettingsState settings = ErgoKeysSettingsState.getInstance();
+        if (settings.getCommandModeToggle() && this.inCommandMode()) {
             this.activateInsertMode(editor);
             return;
         }

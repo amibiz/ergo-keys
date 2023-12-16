@@ -4,38 +4,41 @@
  * license that can be found in the LICENSE file.
  */
 
-package com.github.amibiz.ergokeys;
+package com.github.amibiz.ergokeys.settings;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-@State(name = "ErgoKeysSettings", storages = @Storage("ergokeys.xml"))
-public class ErgoKeysSettings implements PersistentStateComponent<ErgoKeysSettings> {
+@State(
+        name = "com.github.amibiz.ergokeys.settings.ErgoKeysSettingsState",
+        storages = @Storage("ergokeys.xml")
+)
+public class ErgoKeysSettingsState implements PersistentStateComponent<ErgoKeysSettingsState> {
 
     // Defaults
-    private boolean commandModeToggle = false;
+    public boolean commandModeToggle = false;
 
-    public static ErgoKeysSettings getInstance() {
-        return ServiceManager.getService(ErgoKeysSettings.class);
+    public static ErgoKeysSettingsState getInstance() {
+        return ApplicationManager.getApplication().getService(ErgoKeysSettingsState.class);
     }
 
     @Nullable
     @Override
-    public ErgoKeysSettings getState() {
+    public ErgoKeysSettingsState getState() {
         return this;
     }
 
     @Override
-    public void loadState(@NotNull ErgoKeysSettings state) {
+    public void loadState(@NotNull ErgoKeysSettingsState state) {
         XmlSerializerUtil.copyBean(state, this);
     }
 
-    public boolean isCommandModeToggle() {
+    public boolean getCommandModeToggle() {
         return commandModeToggle;
     }
 

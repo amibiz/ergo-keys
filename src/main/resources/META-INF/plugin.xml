@@ -34,10 +34,11 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-        <applicationConfigurable instance="com.github.amibiz.ergokeys.ErgoKeysConfigurable"/>
-        <applicationService serviceInterface="com.github.amibiz.ergokeys.ErgoKeysSettings"
-                            serviceImplementation="com.github.amibiz.ergokeys.ErgoKeysSettings"/>
+        <applicationConfigurable
+                instance="com.github.amibiz.ergokeys.settings.ErgoKeysSettingsConfigurable"
+                id="com.github.amibiz.ergokeys.ErgoKeysConfigurable"
+                displayName="ErgoKeys"/>
+        <applicationService serviceImplementation="com.github.amibiz.ergokeys.settings.ErgoKeysSettingsState"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.intellij">
