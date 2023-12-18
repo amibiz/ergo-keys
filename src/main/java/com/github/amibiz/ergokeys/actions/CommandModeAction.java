@@ -9,7 +9,6 @@ package com.github.amibiz.ergokeys.actions;
 import com.github.amibiz.ergokeys.ErgoKeysService;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.DumbAwareAction;
@@ -22,14 +21,12 @@ public class CommandModeAction extends DumbAwareAction {
     public void actionPerformed(AnActionEvent e) {
         LOG.debug("actionPerformed: event.getInputEvent=", e.getInputEvent());
 
-        ErgoKeysService service = ApplicationManager.
-                getApplication().
-                getService(ErgoKeysService.class);
-
         Editor editor = e.getData(CommonDataKeys.EDITOR);
         if (editor == null) {
             return;
         }
+
+        ErgoKeysService service = ErgoKeysService.getInstance();
         service.activateCommandMode(editor);
     }
 

@@ -1,7 +1,6 @@
 package com.github.amibiz.ergokeys;
 
 import com.intellij.openapi.actionSystem.ex.ActionUtil;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
@@ -27,9 +26,7 @@ public class EditorCreatedListener implements EditorFactoryListener {
         editor.getContentComponent().addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent focusEvent) {
-                ErgoKeysService service = ApplicationManager.
-                        getApplication().
-                        getService(ErgoKeysService.class);
+                ErgoKeysService service = ErgoKeysService.getInstance();
 
                 LOG.debug("focusGained: focusEvent=", focusEvent);
                 editor.getSettings().setBlockCursor(service.inCommandMode());
@@ -39,10 +36,7 @@ public class EditorCreatedListener implements EditorFactoryListener {
             public void focusLost(FocusEvent focusEvent) {
                 LOG.debug("focusLost: focusEvent=", focusEvent);
 
-                ErgoKeysService service = ApplicationManager.
-                        getApplication().
-                        getService(ErgoKeysService.class);
-
+                ErgoKeysService service = ErgoKeysService.getInstance();
 
                 if (focusEvent.getOppositeComponent() != null &&
                         focusEvent.getOppositeComponent().getClass().getName().equals("com.intellij.terminal.JBTerminalPanel")) {

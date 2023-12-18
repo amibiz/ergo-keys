@@ -1,7 +1,6 @@
 package com.github.amibiz.ergokeys;
 
 import com.intellij.openapi.actionSystem.Shortcut;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.KeymapManagerListener;
@@ -29,9 +28,7 @@ public class ActiveKeymapChangedListener implements KeymapManagerListener {
             return;
         }
 
-        ErgoKeysService service = ApplicationManager.
-                getApplication().
-                getService(ErgoKeysService.class);
+        ErgoKeysService service = ErgoKeysService.getInstance();
 
         if (keymap == null || keymap.equals(service.getCommandModeKeymap()) || keymap.equals(service.getInsertModeKeymap())) {
             return;
@@ -55,9 +52,7 @@ public class ActiveKeymapChangedListener implements KeymapManagerListener {
     }
 
     private void purgeCommandModeShortcuts(@NotNull Keymap dst) {
-        ErgoKeysService service = ApplicationManager.
-                getApplication().
-                getService(ErgoKeysService.class);
+        ErgoKeysService service = ErgoKeysService.getInstance();
 
         for (Keymap keymap : service.getAllErgoKeysKeymaps()) {
             this.purgeShortcuts(keymap, dst);

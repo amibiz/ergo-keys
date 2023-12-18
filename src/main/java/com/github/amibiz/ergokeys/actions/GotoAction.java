@@ -11,7 +11,6 @@ import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 
@@ -25,10 +24,7 @@ public class GotoAction extends AnAction {
         // Get all the required data from data keys
         final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
 
-        ErgoKeysService service = ApplicationManager.
-                getApplication().
-                getService(ErgoKeysService.class);
-
+        ErgoKeysService service = ErgoKeysService.getInstance();
         service.activateInsertMode(editor);
 
         AnAction action = ActionManager.getInstance().getAction("GotoAction");

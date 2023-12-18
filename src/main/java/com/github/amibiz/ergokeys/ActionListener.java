@@ -7,7 +7,6 @@ import com.intellij.ide.actions.ViewStructureAction;
 import com.intellij.ide.actions.runAnything.RunAnythingAction;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.ex.AnActionListener;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actions.IncrementalFindAction;
@@ -20,10 +19,6 @@ public class ActionListener implements AnActionListener {
     public void beforeActionPerformed(@NotNull AnAction action, @NotNull AnActionEvent event) {
         LOG.debug("beforeActionPerformed:", " action=", action.getClass(), " event=", event.getInputEvent());
 
-        ErgoKeysService service = ApplicationManager.
-                getApplication().
-                getService(ErgoKeysService.class);
-
         if (action.getClass().equals(SearchEverywhereAction.class) ||
                 action.getClass().equals(RunAnythingAction.class) ||
                 action.getClass().equals(IncrementalFindAction.class) ||
@@ -32,6 +27,7 @@ public class ActionListener implements AnActionListener {
                 action.getClass().equals(Switcher.class)) {
             final Editor editor = event.getDataContext().getData(CommonDataKeys.EDITOR);
             if (editor != null) {
+                ErgoKeysService service = ErgoKeysService.getInstance();
                 service.activateInsertMode(editor);
             }
         }

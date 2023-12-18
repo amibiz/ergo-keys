@@ -3,6 +3,7 @@ package com.github.amibiz.ergokeys;
 import com.github.amibiz.ergokeys.settings.ErgoKeysSettingsState;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.Shortcut;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
@@ -31,6 +32,10 @@ public final class ErgoKeysService {
     private Keymap insertModeKeymap;
     private Keymap commandModeKeymap;
     private Editor lastEditorUsed;
+
+    public static ErgoKeysService getInstance() {
+        return ApplicationManager.getApplication().getService(ErgoKeysService.class);
+    }
 
     public String loadPersistentProperty(String key) {
         return propertiesComponent.getValue(persistentPropertyName(key));
