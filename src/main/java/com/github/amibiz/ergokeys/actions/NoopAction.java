@@ -1,4 +1,4 @@
-package com.github.amibiz.ergokeys;
+package com.github.amibiz.ergokeys.actions;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.diagnostic.Logger;

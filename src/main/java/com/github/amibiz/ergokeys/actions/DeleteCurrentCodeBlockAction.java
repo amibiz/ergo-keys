@@ -1,4 +1,4 @@
-package com.github.amibiz.ergokeys;
+package com.github.amibiz.ergokeys.actions;
 
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnActionEvent;

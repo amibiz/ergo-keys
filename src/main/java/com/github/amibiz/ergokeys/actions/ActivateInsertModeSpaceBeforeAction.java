@@ -1,20 +1,19 @@
-package com.github.amibiz.ergokeys;
+package com.github.amibiz.ergokeys.actions;
 
 import com.intellij.openapi.actionSystem.ActionManager;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.IdeActions;
+import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.DumbAwareAction;
-import com.intellij.util.DocumentUtil;
+import com.intellij.openapi.project.Project;
 
-public class StartOfLineOrParagraphAction extends DumbAwareAction {
-    private static final Logger LOG = Logger.getInstance(StartOfLineOrParagraphAction.class);
-
+public class ActivateInsertModeSpaceBeforeAction extends DumbAwareAction {
+    private static final Logger LOG = Logger.getInstance(ActivateInsertModeSpaceBeforeAction.class);
     final private ActionManager actionManager = ActionManager.getInstance();
 
     @Override
@@ -22,15 +21,17 @@ public class StartOfLineOrParagraphAction extends DumbAwareAction {
         LOG.debug("actionPerformed: event.getInputEvent=", e.getInputEvent());
 
         final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
+        final Project project = e.getProject();
         final Document document = editor.getDocument();
         final CaretModel caretModel = editor.getCaretModel();
         final Caret caret = caretModel.getCurrentCaret();
 
-        String ideActionId = IdeActions.ACTION_EDITOR_MOVE_LINE_START;
-        if (DocumentUtil.isAtLineStart(caret.getOffset(), document)) {
-            ideActionId = IdeActions.ACTION_EDITOR_BACKWARD_PARAGRAPH;
-        }
-
-        actionManager.getAction(ideActionId).actionPerformed(e);
+        WriteCommandAction.runWriteCommandAction(project, new Runnable() {
+            @Override
+            public void run() {
+                document.insertString(caret.getOffset(), " ");
+            }
+        });
+        actionManager.getAction("ErgoKeysInsertMode").actionPerformed(e);
     }
 }

@@ -59,45 +59,45 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
 
     <actions>
         <action id="ErgoKeysCommandMode"
-                class="com.github.amibiz.ergokeys.CommandModeAction"
+                class="com.github.amibiz.ergokeys.actions.CommandModeAction"
                 text="Command Mode"
                 description="Activate command mode">
             <keyboard-shortcut keymap="$default" first-keystroke="alt SPACE"/>
             <keyboard-shortcut keymap="$default" first-keystroke="shift SPACE"/>
         </action>
         <action id="ErgoKeysInsertMode"
-                class="com.github.amibiz.ergokeys.InsertModeAction"
+                class="com.github.amibiz.ergokeys.actions.InsertModeAction"
                 text="Insert Mode"
                 description="Activate insert mode"/>
         <action id="ErgoKeysSelectString"
-                class="com.github.amibiz.ergokeys.SelectStringAction"
+                class="com.github.amibiz.ergokeys.actions.SelectStringAction"
                 text="Select String"
                 description="Select string"/>
         <action id="ErgoKeysStartOfLineOrParagraphAction"
-                class="com.github.amibiz.ergokeys.StartOfLineOrParagraphAction"
+                class="com.github.amibiz.ergokeys.actions.StartOfLineOrParagraphAction"
                 text="Move Caret to Line or Block Start"
                 description="Move caret to line or block start"/>
         <action id="ErgoKeysEndOfLineOrParagraphAction"
-                class="com.github.amibiz.ergokeys.EndOfLineOrParagraphAction"
+                class="com.github.amibiz.ergokeys.actions.EndOfLineOrParagraphAction"
                 text="EndOfLineOrParagraphAction"
                 description="EndOfLineOrParagraphAction"/>
         <action id="ErgoKeysDeleteCurrentCodeBlockAction"
-                class="com.github.amibiz.ergokeys.DeleteCurrentCodeBlockAction"
+                class="com.github.amibiz.ergokeys.actions.DeleteCurrentCodeBlockAction"
                 text="ErgoKeysDeleteCurrentCodeBlockAction"
                 description="DeleteCurrentCodeBlockAction"/>
         <action id="ErgoKeysActivateInsertModeSpaceBefore"
-                class="com.github.amibiz.ergokeys.ActivateInsertModeSpaceBeforeAction"
+                class="com.github.amibiz.ergokeys.actions.ActivateInsertModeSpaceBeforeAction"
                 text="ActivateInsertModeSpaceBefore"
                 description="ActivateInsertModeSpaceBefore"/>
         <action id="ErgoKeysGotoAction"
-                class="com.github.amibiz.ergokeys.GotoAction"
+                class="com.github.amibiz.ergokeys.actions.GotoAction"
                 text="GotoAction"
                 description="GotoAction"/>
 
         <!-- Note that order matters, noop action must be declared last otherwise it
              will take precedence over actions declared after it-->
         <action id="ErgoKeysNoopAction"
-                class="com.github.amibiz.ergokeys.NoopAction"
+                class="com.github.amibiz.ergokeys.actions.NoopAction"
                 text="Noop"
                 description="No operation"/>
     </actions>

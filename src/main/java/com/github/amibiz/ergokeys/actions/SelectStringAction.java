@@ -4,7 +4,7 @@
  * license that can be found in the LICENSE file.
  */
 
-package com.github.amibiz.ergokeys;
+package com.github.amibiz.ergokeys.actions;
 
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.diagnostic.Logger;
