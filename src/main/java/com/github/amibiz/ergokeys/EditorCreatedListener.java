@@ -38,9 +38,12 @@ public class EditorCreatedListener implements EditorFactoryListener {
 
                 ErgoKeysService service = ErgoKeysService.getInstance();
 
-                if (focusEvent.getOppositeComponent() != null &&
-                        focusEvent.getOppositeComponent().getClass().getName().equals("com.intellij.terminal.JBTerminalPanel")) {
-                    service.setActiveKeymap(service.getInsertModeKeymap());
+                if (focusEvent.getOppositeComponent() != null) {
+                    String name = focusEvent.getOppositeComponent().getClass().getName();
+                    if (name.equals("com.intellij.terminal.JBTerminalPanel") ||
+                            name.equals("com.intellij.ui.EditorTextField")) {
+                        service.setActiveKeymap(service.getInsertModeKeymap());
+                    }
                 }
                 service.setLastEditorUsed(editor);
             }
