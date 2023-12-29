@@ -48,6 +48,8 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
         <bundledKeymap file="ErgoKeys (Programmer Dvorak).xml"/>
 
         <editorFactoryListener implementation="com.github.amibiz.ergokeys.EditorCreatedListener"/>
+        <statusBarWidgetFactory id="ErgoKeys"
+                                implementation="com.github.amibiz.ergokeys.ErgoKeysStatusBarWidgetFactory"/>
     </extensions>
 
     <applicationListeners>
