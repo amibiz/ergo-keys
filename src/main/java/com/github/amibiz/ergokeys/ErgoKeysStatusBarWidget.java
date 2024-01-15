@@ -16,8 +16,11 @@ import com.intellij.openapi.keymap.KeymapManagerListener;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.WindowManager;
 import com.intellij.openapi.wm.impl.status.EditorBasedWidget;
+import com.intellij.util.Consumer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.awt.event.MouseEvent;
 
 public class ErgoKeysStatusBarWidget extends EditorBasedWidget {
     public static final String COMMAND_MODE_WIDGET_TEXT = "ErgoKeys:CMD";
@@ -50,6 +53,12 @@ public class ErgoKeysStatusBarWidget extends EditorBasedWidget {
     @Override
     public WidgetPresentation getPresentation() {
         return new TextPresentation() {
+            @Nullable
+            @Override
+            public Consumer<MouseEvent> getClickConsumer() {
+                return null;
+            }
+
             @Nullable
             @Override
             public String getTooltipText() {

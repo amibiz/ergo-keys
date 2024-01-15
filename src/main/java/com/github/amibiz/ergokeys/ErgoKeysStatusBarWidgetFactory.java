@@ -11,7 +11,9 @@ package com.github.amibiz.ergokeys;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.NlsContexts;
+import com.intellij.openapi.wm.StatusBar;
 import com.intellij.openapi.wm.StatusBarWidget;
 import com.intellij.openapi.wm.StatusBarWidgetFactory;
 import kotlinx.coroutines.CoroutineScope;
@@ -32,16 +34,33 @@ public class ErgoKeysStatusBarWidgetFactory implements StatusBarWidgetFactory {
     }
 
     @Override
+    public boolean canBeEnabledOn(@NotNull StatusBar statusBar) {
+        return true;
+    }
+
+    @Override
+    public boolean isAvailable(@NotNull Project project) {
+        return true;
+    }
+
+    @Override
+    public @NotNull StatusBarWidget createWidget(@NotNull Project project) {
+        LOG.debug("createWidget: project=", project);
+
+        return new ErgoKeysStatusBarWidget(project);
+    }
+
+    @Override
     public @NotNull StatusBarWidget createWidget(@NotNull Project project, @NotNull CoroutineScope scope) {
         LOG.debug("createWidget: project=", project, " scope=", scope);
 
-        return new ErgoKeysStatusBarWidget(project);
+        return createWidget(project);
     }
 
     @Override
     public void disposeWidget(@NotNull StatusBarWidget widget) {
         LOG.debug("disposeWidget: widget=", widget);
 
-        StatusBarWidgetFactory.super.disposeWidget(widget);
+        Disposer.dispose(widget);
     }
 }
