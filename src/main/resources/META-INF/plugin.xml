@@ -19,13 +19,11 @@ F (qwerty)   activate <i>Insert Mode</i>
 U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
-    <!--&lt;!&ndash; please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description &ndash;&gt;-->
-    <idea-version since-build="213"/>
-
     <change-notes><![CDATA[
-    <b>1.15</b><br/>
+    <h1>1.16</h1>
     <ul>
-        <li>update IntelliJ support to all future versions</li>
+        <li>Add CMD/INS mode indicator in status bar</li>
+        <li>Fix rename/move file dialog text field stuck in CMD mode</li>
     </ul
     ]]></change-notes>
 
