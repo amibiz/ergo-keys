@@ -23,11 +23,13 @@ import org.jetbrains.annotations.Nullable;
 import java.awt.event.MouseEvent;
 
 public class ErgoKeysStatusBarWidget extends EditorBasedWidget {
-    public static final String COMMAND_MODE_WIDGET_TEXT = "ErgoKeys:CMD";
-
     public static final String WIDGET_ID = "ErgoKeys";
-    public static final String INSERT_MODE_WIDGET_TEXT = "ErgoKeys:INS";
     private static final Logger LOG = Logger.getInstance(ErgoKeysStatusBarWidget.class);
+
+    public static final String COMMAND_MODE_WIDGET_TEXT = "CMD";
+    public static final String INSERT_MODE_WIDGET_TEXT = "INS";
+    private static final String COMMAND_MODE_WIDGET_TEXT_LONG = "Command";
+    private static final String INSERT_MODE_WIDGET_TEXT_LONG = "Insert";
 
     protected ErgoKeysStatusBarWidget(@NotNull Project project) {
         super(project);
@@ -62,7 +64,14 @@ public class ErgoKeysStatusBarWidget extends EditorBasedWidget {
             @Nullable
             @Override
             public String getTooltipText() {
-                return null;
+                LOG.debug("getTooltipText");
+
+                ErgoKeysService service = ErgoKeysService.getInstance();
+                String mode = INSERT_MODE_WIDGET_TEXT_LONG;
+                if (service.inCommandMode()) {
+                    mode = COMMAND_MODE_WIDGET_TEXT_LONG;
+                }
+                return mode + " Mode";
             }
 
             @NotNull
