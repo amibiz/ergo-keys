@@ -12,10 +12,11 @@ package com.github.amibiz.ergokeys;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.KeymapManagerListener;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ActiveKeymapChangedListener implements KeymapManagerListener {
-    private static final Logger LOG = Logger.getInstance(ActiveKeymapChangedListener.class);
+public class KeymapListener implements KeymapManagerListener {
+    private static final Logger LOG = Logger.getInstance(KeymapListener.class);
 
     private boolean firstTime = true;
     @Override
@@ -36,5 +37,17 @@ public class ActiveKeymapChangedListener implements KeymapManagerListener {
         }
 
         ErgoKeysService.getInstance().activeKeymapChanged(keymap);
+    }
+
+    @Override
+    public void keymapAdded(@NotNull Keymap keymap) {
+        LOG.debug("keymapAdded");
+        ErgoKeysService.getInstance().keymapAdded(keymap);
+    }
+
+    @Override
+    public void keymapRemoved(@NotNull Keymap keymap) {
+        LOG.debug("keymapRemoved");
+        ErgoKeysService.getInstance().keymapRemoved(keymap);
     }
 }
