@@ -172,4 +172,40 @@ public final class ErgoKeysService {
             }
         }
     }
+
+    public void activeKeymapChanged(Keymap keymap) {
+        if (keymap == null || keymap.equals(getCommandModeKeymap()) || keymap.equals(getInsertModeKeymap())) {
+            return;
+        }
+
+        String key;
+        if (isErgoKeysKeymap(keymap)) {
+            setCommandModeKeymap(keymap);
+            key = "commandModeKeymapName";
+        } else if (getInsertModeKeymap() != null) {
+            purgeCommandModeShortcuts(getInsertModeKeymap());
+            setInsertModeKeymap(keymap);
+            key = "insertModeKeymapName";
+            extendCommandModeShortcuts(getInsertModeKeymap());
+            activateInsertMode(getLastEditorUsed());
+        } else {
+            LOG.debug("activeKeymapChanged: missing insert mode keymap");
+            return;
+        }
+        storePersistentProperty(key, keymap.getName());
+    }
+
+    private void purgeCommandModeShortcuts(@NotNull Keymap dst) {
+        for (Keymap keymap : getAllErgoKeysKeymaps()) {
+            this.purgeShortcuts(keymap, dst);
+        }
+    }
+
+    private void purgeShortcuts(@NotNull Keymap dst, Keymap src) {
+        for (String actionId : src.getActionIds()) {
+            for (Shortcut shortcut : src.getShortcuts(actionId)) {
+                dst.removeShortcut(actionId, shortcut);
+            }
+        }
+    }
 }
