@@ -53,7 +53,7 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     <applicationListeners>
         <listener class="com.github.amibiz.ergokeys.ActionListener"
                   topic="com.intellij.openapi.actionSystem.ex.AnActionListener"/>
-        <listener class="com.github.amibiz.ergokeys.ActiveKeymapChangedListener"
+        <listener class="com.github.amibiz.ergokeys.KeymapListener"
                   topic="com.intellij.openapi.keymap.KeymapManagerListener"/>
     </applicationListeners>
 

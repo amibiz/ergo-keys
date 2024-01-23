@@ -22,8 +22,8 @@ import com.intellij.openapi.keymap.ex.KeymapManagerEx;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public final class ErgoKeysService {
@@ -41,6 +41,20 @@ public final class ErgoKeysService {
     private Keymap insertModeKeymap;
     private Keymap commandModeKeymap;
     private Editor lastEditorUsed;
+    private final Set<Keymap> ergoKeysKeymaps = new HashSet<>();
+
+    public ErgoKeysService() {
+        LOG.debug("Started");
+
+        KeymapManagerEx keymapManagerEx = KeymapManagerEx.getInstanceEx();
+
+        // Setup ergokeys keymaps
+        for (Keymap keymap : keymapManagerEx.getAllKeymaps()) {
+            if (isErgoKeysKeymap(keymap)) {
+                ergoKeysKeymaps.add(keymap);
+            }
+        }
+    }
 
     public static ErgoKeysService getInstance() {
         return ApplicationManager.getApplication().getService(ErgoKeysService.class);
@@ -146,21 +160,8 @@ public final class ErgoKeysService {
         return false;
     }
 
-    public Keymap[] getAllErgoKeysKeymaps() {
-        KeymapManagerEx keymapManagerEx = KeymapManagerEx.getInstanceEx();
-
-        List<Keymap> keymaps = new ArrayList<>();
-        for (Keymap keymap : keymapManagerEx.getAllKeymaps()) {
-            LOG.debug("getAllErgoKeysKeymaps: check keymap ", keymap);
-            if (isErgoKeysKeymap(keymap)) {
-                keymaps.add(keymap);
-            }
-        }
-        return keymaps.toArray(new Keymap[0]);
-    }
-
     public void extendCommandModeShortcuts(@NotNull Keymap dst) {
-        for (Keymap keymap : this.getAllErgoKeysKeymaps()) {
+        for (Keymap keymap : ergoKeysKeymaps) {
             this.extendShortcuts(keymap, dst);
         }
     }
@@ -196,7 +197,7 @@ public final class ErgoKeysService {
     }
 
     private void purgeCommandModeShortcuts(@NotNull Keymap dst) {
-        for (Keymap keymap : getAllErgoKeysKeymaps()) {
+        for (Keymap keymap : ergoKeysKeymaps) {
             this.purgeShortcuts(keymap, dst);
         }
     }
@@ -207,5 +208,15 @@ public final class ErgoKeysService {
                 dst.removeShortcut(actionId, shortcut);
             }
         }
+    }
+
+    public void keymapAdded(@NotNull Keymap keymap) {
+        if (isErgoKeysKeymap(keymap)) {
+            ergoKeysKeymaps.add(keymap);
+        }
+    }
+
+    public void keymapRemoved(@NotNull Keymap keymap) {
+        ergoKeysKeymaps.remove(keymap);
     }
 }
