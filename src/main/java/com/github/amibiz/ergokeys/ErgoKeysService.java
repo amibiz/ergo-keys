@@ -32,9 +32,9 @@ public final class ErgoKeysService {
     private static final String PLUGIN_ID = "com.github.amibiz.ergokeys";
 
     private static final String ROOT_ERGOKEYS_KEYMAP = "$ergokeys";
+    private static final String DEFAULT_ERGOKEYS_KEYMAP = "ErgoKeys (QWERTY)";
     public static final String INSERT_MODE_KEYMAP_PERSISTENT_PROPERTY_NAME = "insertModeKeymapName";
     public static final String COMMAND_MODE_KEYMAP_PERSISTENT_PROPERTY_NAME = "commandModeKeymapName";
-    private static final String DEFAULT_ERGOKEYS_KEYMAP = "ErgoKeys (QWERTY)";
 
     private Keymap insertModeKeymap;
     private Keymap commandModeKeymap;
@@ -90,36 +90,32 @@ public final class ErgoKeysService {
         return insertModeKeymap;
     }
 
-    public Keymap getCommandModeKeymap() {
-        return commandModeKeymap;
-    }
-
     public void setCommandModeKeymap(Keymap keymap) {
         assert keymap != null : "Command mode keymap must not be null";
 
-        if (this.commandModeKeymap != keymap) {
+        if (commandModeKeymap != keymap) {
             storePersistentProperty(COMMAND_MODE_KEYMAP_PERSISTENT_PROPERTY_NAME, keymap.getName());
         }
 
-        this.commandModeKeymap = keymap;
+        commandModeKeymap = keymap;
     }
 
     public void setInsertModeKeymap(Keymap keymap) {
         assert keymap != null : "Insert mode keymap must not be null";
 
-        if (this.insertModeKeymap != keymap) {
+        if (insertModeKeymap != keymap) {
             storePersistentProperty(INSERT_MODE_KEYMAP_PERSISTENT_PROPERTY_NAME, keymap.getName());
         }
 
-        this.insertModeKeymap = keymap;
+        insertModeKeymap = keymap;
     }
 
     public Editor getLastEditorUsed() {
         return lastEditorUsed;
     }
 
-    public void setLastEditorUsed(Editor lastEditorUsed) {
-        this.lastEditorUsed = lastEditorUsed;
+    public void setLastEditorUsed(Editor editor) {
+        lastEditorUsed = editor;
     }
 
     public void setActiveKeymap(@NotNull Keymap keymap) {
@@ -132,7 +128,7 @@ public final class ErgoKeysService {
 
     public void activateInsertMode(Editor editor) {
         editor.getSettings().setBlockCursor(false);
-        this.setActiveKeymap(this.getInsertModeKeymap());
+        setActiveKeymap(insertModeKeymap);
     }
 
     public void activateCommandMode(Editor editor) {
@@ -142,10 +138,10 @@ public final class ErgoKeysService {
             return;
         }
         editor.getSettings().setBlockCursor(true);
-        KeymapManagerEx.getInstanceEx().setActiveKeymap(this.getCommandModeKeymap());
+        setActiveKeymap(commandModeKeymap);
     }
 
-    public boolean isErgoKeysKeymap(@Nullable Keymap keymap) {
+    private boolean isErgoKeysKeymap(@Nullable Keymap keymap) {
         for (; keymap != null; keymap = keymap.getParent()) {
             if (ROOT_ERGOKEYS_KEYMAP.equalsIgnoreCase(keymap.getName())) {
                 return true;
@@ -154,7 +150,25 @@ public final class ErgoKeysService {
         return false;
     }
 
-    public void extendCommandModeShortcuts(@NotNull Keymap dst) {
+    public void activeKeymapChanged(Keymap keymap) {
+        if (keymap == null || keymap == commandModeKeymap || keymap == insertModeKeymap) {
+            return;
+        }
+
+        if (isErgoKeysKeymap(keymap)) {
+            LOG.debug("activeKeymapChanged: changed to ergokeys new keymap");
+            setCommandModeKeymap(keymap);
+        } else {
+            LOG.debug("activeKeymapChanged: changed to new non ergokeys keymap");
+            purgeCommandModeShortcuts(insertModeKeymap);
+            extendCommandModeShortcuts(keymap);
+            setInsertModeKeymap(keymap);
+            activateInsertMode(getLastEditorUsed());
+        }
+    }
+
+
+    private void extendCommandModeShortcuts(@NotNull Keymap dst) {
         for (Keymap keymap : ergoKeysKeymaps) {
             this.extendShortcuts(keymap, dst);
         }
@@ -166,28 +180,6 @@ public final class ErgoKeysService {
                 dst.addShortcut(actionId, shortcut);
             }
         }
-    }
-
-    public void activeKeymapChanged(Keymap keymap) {
-        if (keymap == null || keymap.equals(getCommandModeKeymap()) || keymap.equals(getInsertModeKeymap())) {
-            return;
-        }
-
-        String key;
-        if (isErgoKeysKeymap(keymap)) {
-            setCommandModeKeymap(keymap);
-            key = "commandModeKeymapName";
-        } else if (getInsertModeKeymap() != null) {
-            purgeCommandModeShortcuts(getInsertModeKeymap());
-            setInsertModeKeymap(keymap);
-            key = "insertModeKeymapName";
-            extendCommandModeShortcuts(getInsertModeKeymap());
-            activateInsertMode(getLastEditorUsed());
-        } else {
-            LOG.debug("activeKeymapChanged: missing insert mode keymap");
-            return;
-        }
-        storePersistentProperty(key, keymap.getName());
     }
 
     private void purgeCommandModeShortcuts(@NotNull Keymap dst) {
