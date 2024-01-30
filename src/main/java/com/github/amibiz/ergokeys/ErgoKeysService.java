@@ -46,6 +46,15 @@ public final class ErgoKeysService {
 
         KeymapManagerEx keymapManagerEx = KeymapManagerEx.getInstanceEx();
 
+        // NOTE: we use the keymap parent relationship to extend derived
+        // shortcuts and to identify command mode keymaps. At this stage,
+        // the keymaps parent reference is null (lazy).
+        // To overcome this, we force all keymaps to load by calling the
+        // getActionIdList() method.
+        for (Keymap keymap : keymapManagerEx.getAllKeymaps()) {
+            keymap.getActionIdList();
+        }
+
         // Setup command mode keymap
         String commandModeKeymapName = loadPersistentProperty(COMMAND_MODE_KEYMAP_PERSISTENT_PROPERTY_NAME);
         if (commandModeKeymapName == null) {
@@ -68,6 +77,9 @@ public final class ErgoKeysService {
                 ergoKeysKeymaps.add(keymap);
             }
         }
+
+        // Extend all command mode keymaps with insert mode keymap shortcuts
+        extendCommandModeShortcuts(insertModeKeymap);
     }
 
     public static ErgoKeysService getInstance() {
@@ -168,9 +180,9 @@ public final class ErgoKeysService {
     }
 
 
-    private void extendCommandModeShortcuts(@NotNull Keymap dst) {
+    private void extendCommandModeShortcuts(@NotNull Keymap src) {
         for (Keymap keymap : ergoKeysKeymaps) {
-            this.extendShortcuts(keymap, dst);
+            this.extendShortcuts(keymap, src);
         }
     }
 
