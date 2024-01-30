@@ -35,29 +35,15 @@ public class EditorCreatedListener implements EditorFactoryListener {
         editor.getContentComponent().addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent focusEvent) {
-                ErgoKeysService service = ErgoKeysService.getInstance();
-
                 LOG.debug("focusGained: focusEvent=", focusEvent);
-                editor.getSettings().setBlockCursor(service.inCommandMode());
+                ErgoKeysService.getInstance().editorFocusGained(editor);
             }
 
             @Override
             public void focusLost(FocusEvent focusEvent) {
                 LOG.debug("focusLost: focusEvent=", focusEvent);
-
-                ErgoKeysService service = ErgoKeysService.getInstance();
-
-                if (focusEvent.getOppositeComponent() != null) {
-                    String name = focusEvent.getOppositeComponent().getClass().getName();
-                    if (name.equals("com.intellij.terminal.JBTerminalPanel") ||
-                            name.equals("com.intellij.ui.EditorTextField")) {
-                        service.setActiveKeymap(service.getInsertModeKeymap());
-                    }
-                }
-                service.setLastEditorUsed(editor);
+                ErgoKeysService.getInstance().editorFocusLost(focusEvent, editor);
             }
         });
-
-        EditorFactoryListener.super.editorCreated(event);
     }
 }

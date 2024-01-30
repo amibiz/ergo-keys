@@ -22,6 +22,7 @@ import com.intellij.openapi.keymap.ex.KeymapManagerEx;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.event.FocusEvent;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -86,11 +87,11 @@ public final class ErgoKeysService {
         return ApplicationManager.getApplication().getService(ErgoKeysService.class);
     }
 
-    public String loadPersistentProperty(String key) {
+    private String loadPersistentProperty(String key) {
         return PropertiesComponent.getInstance().getValue(persistentPropertyName(key));
     }
 
-    public void storePersistentProperty(String key, String value) {
+    private void storePersistentProperty(String key, String value) {
         PropertiesComponent.getInstance().setValue(persistentPropertyName(key), value);
     }
 
@@ -98,11 +99,7 @@ public final class ErgoKeysService {
         return PLUGIN_ID + "." + key;
     }
 
-    public Keymap getInsertModeKeymap() {
-        return insertModeKeymap;
-    }
-
-    public void setCommandModeKeymap(Keymap keymap) {
+    private void setCommandModeKeymap(Keymap keymap) {
         assert keymap != null : "Command mode keymap must not be null";
 
         if (commandModeKeymap != keymap) {
@@ -112,7 +109,7 @@ public final class ErgoKeysService {
         commandModeKeymap = keymap;
     }
 
-    public void setInsertModeKeymap(Keymap keymap) {
+    private void setInsertModeKeymap(Keymap keymap) {
         assert keymap != null : "Insert mode keymap must not be null";
 
         if (insertModeKeymap != keymap) {
@@ -122,15 +119,7 @@ public final class ErgoKeysService {
         insertModeKeymap = keymap;
     }
 
-    public Editor getLastEditorUsed() {
-        return lastEditorUsed;
-    }
-
-    public void setLastEditorUsed(Editor editor) {
-        lastEditorUsed = editor;
-    }
-
-    public void setActiveKeymap(@NotNull Keymap keymap) {
+    private void setActiveKeymap(@NotNull Keymap keymap) {
         KeymapManagerEx.getInstanceEx().setActiveKeymap(keymap);
     }
 
@@ -175,7 +164,7 @@ public final class ErgoKeysService {
             purgeCommandModeShortcuts(insertModeKeymap);
             extendCommandModeShortcuts(keymap);
             setInsertModeKeymap(keymap);
-            activateInsertMode(getLastEditorUsed());
+            activateInsertMode(lastEditorUsed);
         }
     }
 
@@ -216,5 +205,20 @@ public final class ErgoKeysService {
 
     public void keymapRemoved(@NotNull Keymap keymap) {
         ergoKeysKeymaps.remove(keymap);
+    }
+
+    public void editorFocusGained(Editor editor) {
+        editor.getSettings().setBlockCursor(inCommandMode());
+    }
+
+    public void editorFocusLost(FocusEvent focusEvent, Editor editor) {
+        if (focusEvent.getOppositeComponent() != null) {
+            String name = focusEvent.getOppositeComponent().getClass().getName();
+            if (name.equals("com.intellij.terminal.JBTerminalPanel") ||
+                    name.equals("com.intellij.ui.EditorTextField")) {
+                setActiveKeymap(insertModeKeymap);
+            }
+        }
+        lastEditorUsed = editor;
     }
 }
