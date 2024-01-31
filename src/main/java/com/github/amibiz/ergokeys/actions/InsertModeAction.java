@@ -30,6 +30,6 @@ public class InsertModeAction extends DumbAwareAction {
         }
 
         ErgoKeysService service = ErgoKeysService.getInstance();
-        service.activateInsertMode(editor);
+        service.activateInsertMode(editor, false);
     }
 }

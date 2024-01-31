@@ -37,19 +37,15 @@ public class ActionListener implements AnActionListener {
             final Editor editor = event.getDataContext().getData(CommonDataKeys.EDITOR);
             if (editor != null) {
                 ErgoKeysService service = ErgoKeysService.getInstance();
-                service.activateInsertMode(editor);
+                service.activateInsertMode(editor, true);
             }
         }
-
-        AnActionListener.super.beforeActionPerformed(action, event);
     }
 
     @Override
     public void afterActionPerformed(@NotNull AnAction action, @NotNull AnActionEvent event, @NotNull AnActionResult result) {
         LOG.debug("afterActionPerformed:", " action=", action.getClass(), " event=",
                 event.getInputEvent(), " result=", result.getClass());
-
-        AnActionListener.super.afterActionPerformed(action, event, result);
     }
 
     @Override
