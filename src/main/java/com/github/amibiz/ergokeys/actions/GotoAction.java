@@ -28,7 +28,7 @@ public class GotoAction extends AnAction {
         final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
 
         ErgoKeysService service = ErgoKeysService.getInstance();
-        service.activateInsertMode(editor);
+        service.activateInsertMode(editor, true);
 
         AnAction action = ActionManager.getInstance().getAction("GotoAction");
         action.actionPerformed(e);

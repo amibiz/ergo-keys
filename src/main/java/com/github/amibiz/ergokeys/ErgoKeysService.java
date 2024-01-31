@@ -42,6 +42,8 @@ public final class ErgoKeysService {
     private Editor lastEditorUsed;
     private final Set<Keymap> ergoKeysKeymaps = new HashSet<>();
 
+    private ModeState state;
+
     public ErgoKeysService() {
         LOG.debug("Started");
 
@@ -81,6 +83,18 @@ public final class ErgoKeysService {
 
         // Extend all command mode keymaps with insert mode keymap shortcuts
         extendCommandModeShortcuts(insertModeKeymap);
+
+        // Set initial state based on active keymap
+        if (isErgoKeysKeymap(keymapManagerEx.getActiveKeymap())) {
+            setState(ModeState.CMD);
+        } else {
+            setState(ModeState.INS);
+        }
+    }
+
+    private void setState(ModeState state) {
+        LOG.debug("setState: state=" + state);
+        this.state = state;
     }
 
     public static ErgoKeysService getInstance() {
@@ -97,6 +111,12 @@ public final class ErgoKeysService {
 
     private String persistentPropertyName(String key) {
         return PLUGIN_ID + "." + key;
+    }
+
+    public void activateInsertMode(Editor editor, Boolean tran) {
+        setState(tran ? ModeState.TRAN_INS : ModeState.INS);
+        setActiveKeymap(insertModeKeymap);
+        editor.getSettings().setBlockCursor(false);
     }
 
     private void setCommandModeKeymap(Keymap keymap) {
@@ -127,28 +147,15 @@ public final class ErgoKeysService {
         return isErgoKeysKeymap(KeymapManagerEx.getInstanceEx().getActiveKeymap());
     }
 
-    public void activateInsertMode(Editor editor) {
-        editor.getSettings().setBlockCursor(false);
-        setActiveKeymap(insertModeKeymap);
-    }
-
     public void activateCommandMode(Editor editor) {
         ErgoKeysSettingsState settings = ErgoKeysSettingsState.getInstance();
-        if (settings.getCommandModeToggle() && this.inCommandMode()) {
-            this.activateInsertMode(editor);
+        if (settings.getCommandModeToggle() && inCommandMode()) {
+            activateInsertMode(editor, false);
             return;
         }
-        editor.getSettings().setBlockCursor(true);
+        setState(ModeState.CMD);
         setActiveKeymap(commandModeKeymap);
-    }
-
-    private boolean isErgoKeysKeymap(@Nullable Keymap keymap) {
-        for (; keymap != null; keymap = keymap.getParent()) {
-            if (ROOT_ERGOKEYS_KEYMAP.equalsIgnoreCase(keymap.getName())) {
-                return true;
-            }
-        }
-        return false;
+        editor.getSettings().setBlockCursor(true);
     }
 
     public void activeKeymapChanged(Keymap keymap) {
@@ -164,8 +171,25 @@ public final class ErgoKeysService {
             purgeCommandModeShortcuts(insertModeKeymap);
             extendCommandModeShortcuts(keymap);
             setInsertModeKeymap(keymap);
-            activateInsertMode(lastEditorUsed);
+            activateInsertMode(lastEditorUsed, false);
         }
+    }
+
+    private boolean isErgoKeysKeymap(@Nullable Keymap keymap) {
+        for (; keymap != null; keymap = keymap.getParent()) {
+            if (ROOT_ERGOKEYS_KEYMAP.equalsIgnoreCase(keymap.getName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void editorFocusGained(Editor editor) {
+        if (state == ModeState.TRAN_INS) {
+            activateCommandMode(editor);
+            return;
+        }
+        editor.getSettings().setBlockCursor(inCommandMode());
     }
 
 
@@ -207,8 +231,10 @@ public final class ErgoKeysService {
         ergoKeysKeymaps.remove(keymap);
     }
 
-    public void editorFocusGained(Editor editor) {
-        editor.getSettings().setBlockCursor(inCommandMode());
+    private enum ModeState {
+        CMD, // Command mode
+        INS, // Insert mode
+        TRAN_INS, // Transient insert mode
     }
 
     public void editorFocusLost(FocusEvent focusEvent, Editor editor) {
