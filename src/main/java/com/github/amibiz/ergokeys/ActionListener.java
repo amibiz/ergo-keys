@@ -10,6 +10,7 @@
 package com.github.amibiz.ergokeys;
 
 import com.intellij.find.actions.FindInPathAction;
+import com.intellij.ide.actions.GotoActionAction;
 import com.intellij.ide.actions.SearchEverywhereAction;
 import com.intellij.ide.actions.Switcher;
 import com.intellij.ide.actions.ViewStructureAction;
@@ -33,7 +34,8 @@ public class ActionListener implements AnActionListener {
                 action.getClass().equals(IncrementalFindAction.class) ||
                 action.getClass().equals(FindInPathAction.class) ||
                 action.getClass().equals(ViewStructureAction.class) ||
-                action.getClass().equals(Switcher.class)) {
+                action.getClass().equals(Switcher.class) ||
+                action.getClass().equals(GotoActionAction.class)) {
             final Editor editor = event.getDataContext().getData(CommonDataKeys.EDITOR);
             if (editor != null) {
                 ErgoKeysService service = ErgoKeysService.getInstance();

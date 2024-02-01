@@ -89,10 +89,6 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
                 class="com.github.amibiz.ergokeys.actions.ActivateInsertModeSpaceBeforeAction"
                 text="ActivateInsertModeSpaceBefore"
                 description="ActivateInsertModeSpaceBefore"/>
-        <action id="ErgoKeysGotoAction"
-                class="com.github.amibiz.ergokeys.actions.GotoAction"
-                text="GotoAction"
-                description="GotoAction"/>
 
         <!-- Note that order matters, noop action must be declared last otherwise it
              will take precedence over actions declared after it-->
