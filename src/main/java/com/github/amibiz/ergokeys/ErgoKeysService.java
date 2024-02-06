@@ -10,12 +10,22 @@
 package com.github.amibiz.ergokeys;
 
 import com.github.amibiz.ergokeys.settings.ErgoKeysSettingsState;
+import com.intellij.find.actions.FindInPathAction;
+import com.intellij.ide.actions.GotoActionAction;
+import com.intellij.ide.actions.SearchEverywhereAction;
+import com.intellij.ide.actions.Switcher;
+import com.intellij.ide.actions.ViewStructureAction;
+import com.intellij.ide.actions.runAnything.RunAnythingAction;
 import com.intellij.ide.util.PropertiesComponent;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.Shortcut;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.actions.IncrementalFindAction;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.KeymapManager;
 import com.intellij.openapi.keymap.ex.KeymapManagerEx;
@@ -184,15 +194,6 @@ public final class ErgoKeysService {
         return false;
     }
 
-    public void editorFocusGained(Editor editor) {
-        if (state == ModeState.TRAN_INS) {
-            activateCommandMode(editor);
-            return;
-        }
-        editor.getSettings().setBlockCursor(inCommandMode());
-    }
-
-
     private void extendCommandModeShortcuts(@NotNull Keymap src) {
         for (Keymap keymap : ergoKeysKeymaps) {
             this.extendShortcuts(keymap, src);
@@ -231,10 +232,33 @@ public final class ErgoKeysService {
         ergoKeysKeymaps.remove(keymap);
     }
 
+    public void beforeActionPerformed(@NotNull AnAction action, @NotNull AnActionEvent event) {
+        if (action.getClass().equals(SearchEverywhereAction.class) ||
+                action.getClass().equals(RunAnythingAction.class) ||
+                action.getClass().equals(IncrementalFindAction.class) ||
+                action.getClass().equals(FindInPathAction.class) ||
+                action.getClass().equals(ViewStructureAction.class) ||
+                action.getClass().equals(Switcher.class) ||
+                action.getClass().equals(GotoActionAction.class)) {
+            final Editor editor = event.getDataContext().getData(CommonDataKeys.EDITOR);
+            if (editor != null) {
+                activateInsertMode(editor, true);
+            }
+        }
+    }
+
     private enum ModeState {
         CMD, // Command mode
         INS, // Insert mode
         TRAN_INS, // Transient insert mode
+    }
+
+    public void editorFocusGained(Editor editor) {
+        if (state == ModeState.TRAN_INS) {
+            activateCommandMode(editor);
+            return;
+        }
+        editor.getSettings().setBlockCursor(inCommandMode());
     }
 
     public void editorFocusLost(FocusEvent focusEvent, Editor editor) {

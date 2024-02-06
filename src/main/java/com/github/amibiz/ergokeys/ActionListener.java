@@ -9,17 +9,12 @@
 
 package com.github.amibiz.ergokeys;
 
-import com.intellij.find.actions.FindInPathAction;
-import com.intellij.ide.actions.GotoActionAction;
-import com.intellij.ide.actions.SearchEverywhereAction;
-import com.intellij.ide.actions.Switcher;
-import com.intellij.ide.actions.ViewStructureAction;
-import com.intellij.ide.actions.runAnything.RunAnythingAction;
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.AnActionResult;
+import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.ex.AnActionListener;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.actions.IncrementalFindAction;
 import org.jetbrains.annotations.NotNull;
 
 public class ActionListener implements AnActionListener {
@@ -28,20 +23,7 @@ public class ActionListener implements AnActionListener {
     @Override
     public void beforeActionPerformed(@NotNull AnAction action, @NotNull AnActionEvent event) {
         LOG.debug("beforeActionPerformed:", " action=", action.getClass(), " event=", event.getInputEvent());
-
-        if (action.getClass().equals(SearchEverywhereAction.class) ||
-                action.getClass().equals(RunAnythingAction.class) ||
-                action.getClass().equals(IncrementalFindAction.class) ||
-                action.getClass().equals(FindInPathAction.class) ||
-                action.getClass().equals(ViewStructureAction.class) ||
-                action.getClass().equals(Switcher.class) ||
-                action.getClass().equals(GotoActionAction.class)) {
-            final Editor editor = event.getDataContext().getData(CommonDataKeys.EDITOR);
-            if (editor != null) {
-                ErgoKeysService service = ErgoKeysService.getInstance();
-                service.activateInsertMode(editor, true);
-            }
-        }
+        ErgoKeysService.getInstance().beforeActionPerformed(action, event);
     }
 
     @Override
