@@ -254,6 +254,12 @@ public final class ErgoKeysService {
     }
 
     public void editorFocusGained(Editor editor) {
+        if (editor.getVirtualFile() == null) {
+            // Do not change state if we are in an EditorComponent that
+            // has no file (for example, the editor text field component
+            // used when right-clicking rename a file in project view).
+            return;
+        }
         if (state == ModeState.TRAN_INS) {
             activateCommandMode(editor);
             return;
@@ -265,8 +271,10 @@ public final class ErgoKeysService {
         if (focusEvent.getOppositeComponent() != null) {
             String name = focusEvent.getOppositeComponent().getClass().getName();
             if (name.equals("com.intellij.terminal.JBTerminalPanel") ||
-                    name.equals("com.intellij.ui.EditorTextField")) {
-                setActiveKeymap(insertModeKeymap);
+                    name.equals("com.intellij.ui.EditorTextField") ||
+                    name.startsWith("com.intellij.ui.EditorComboBoxEditor") ||
+                    name.equals("com.intellij.ide.ui.newItemPopup.NewItemWithTemplatesPopupPanel$JBExtendableTextFieldWithMixedAccessibleContext")) {
+                activateInsertMode(lastEditorUsed, true);
             }
         }
         lastEditorUsed = editor;
