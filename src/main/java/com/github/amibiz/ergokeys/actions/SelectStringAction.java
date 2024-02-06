@@ -19,7 +19,7 @@ import com.intellij.openapi.util.TextRange;
 
 public class SelectStringAction extends DumbAwareAction {
     private static final Logger LOG = Logger.getInstance(SelectStringAction.class);
-    final private ActionManager actionManager = ActionManager.getInstance();
+    private static final int MAX_ITERATIONS = 100;
 
     @Override
     public void actionPerformed(AnActionEvent e) {
@@ -28,8 +28,13 @@ public class SelectStringAction extends DumbAwareAction {
         final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
         final Document document = editor.getDocument();
         final SelectionModel selectionModel = editor.getSelectionModel();
+        final ActionManager actionManager = ActionManager.getInstance();
 
-        while (true) {
+        int iterations = 0;
+
+        while (iterations < MAX_ITERATIONS) {
+            iterations++;
+
             AnAction action = actionManager.getAction(IdeActions.ACTION_EDITOR_SELECT_WORD_AT_CARET);
             action.actionPerformed(e);
 
