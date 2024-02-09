@@ -20,11 +20,16 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <change-notes><![CDATA[
-    <h1>1.16</h1>
+    <h1>1.17</h1>
     <ul>
-        <li>Add CMD/INS mode indicator in status bar</li>
-        <li>Fix rename/move file dialog text field stuck in CMD mode</li>
-    </ul
+        <li>#42 Fix missing extended command mode keymaps shortcuts</li>
+        <li>Fix stuck command mode for actions that have text field</li>
+        <li>Prevent select string action from crashing the IDE in remote development</li>
+        <li>Improve actions text and description</li>
+        <li>Re-activate command mode after closing dialogs</li>
+        <li>Shorten status bar indicator text and add tooltip</li>
+        <li>Performance and stability improvements</li>
+    </ul>
     ]]></change-notes>
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
