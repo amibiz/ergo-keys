@@ -26,9 +26,12 @@ import com.intellij.openapi.components.Service;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actions.IncrementalFindAction;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.KeymapManager;
 import com.intellij.openapi.keymap.ex.KeymapManagerEx;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.testFramework.LightVirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -253,8 +256,14 @@ public final class ErgoKeysService {
         TRAN_INS, // Transient insert mode
     }
 
+    private boolean isFileEditor(Editor editor) {
+        FileDocumentManager documentManager = FileDocumentManager.getInstance();
+        VirtualFile virtualFile = documentManager.getFile(editor.getDocument());
+        return virtualFile != null && !(virtualFile instanceof LightVirtualFile);
+    }
+
     public void editorFocusGained(Editor editor) {
-        if (editor.getVirtualFile() == null) {
+        if (!isFileEditor(editor)) {
             // Do not change state if we are in an EditorComponent that
             // has no file (for example, the editor text field component
             // used when right-clicking rename a file in project view).
