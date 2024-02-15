@@ -26,6 +26,7 @@ import com.intellij.openapi.components.Service;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actions.IncrementalFindAction;
+import com.intellij.openapi.editor.actions.ReplaceAction;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.KeymapManager;
@@ -242,7 +243,8 @@ public final class ErgoKeysService {
                 action.getClass().equals(FindInPathAction.class) ||
                 action.getClass().equals(ViewStructureAction.class) ||
                 action.getClass().equals(Switcher.class) ||
-                action.getClass().equals(GotoActionAction.class)) {
+                action.getClass().equals(GotoActionAction.class) ||
+                action.getClass().equals(ReplaceAction.class)) {
             final Editor editor = event.getDataContext().getData(CommonDataKeys.EDITOR);
             if (editor != null) {
                 activateInsertMode(editor, true);
