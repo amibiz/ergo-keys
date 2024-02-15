@@ -18,11 +18,11 @@ import com.intellij.openapi.project.DumbAwareAction;
 public class DeleteCurrentCodeBlockAction extends DumbAwareAction {
     private static final Logger LOG = Logger.getInstance(DeleteCurrentCodeBlockAction.class);
 
-    final private ActionManager actionManager = ActionManager.getInstance();
-
     @Override
     public void actionPerformed(AnActionEvent e) {
         LOG.debug("actionPerformed: event.getInputEvent=", e.getInputEvent());
+
+        final ActionManager actionManager = ActionManager.getInstance();
 
         actionManager.getAction("EditorCodeBlockStart").actionPerformed(e);
         actionManager.getAction("EditorCodeBlockEndWithSelection").actionPerformed(e);
