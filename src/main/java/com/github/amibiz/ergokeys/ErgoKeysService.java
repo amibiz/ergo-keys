@@ -284,7 +284,8 @@ public final class ErgoKeysService {
             if (name.equals("com.intellij.terminal.JBTerminalPanel") ||
                     name.equals("com.intellij.ui.EditorTextField") ||
                     name.startsWith("com.intellij.ui.EditorComboBoxEditor") ||
-                    name.equals("com.intellij.ide.ui.newItemPopup.NewItemWithTemplatesPopupPanel$JBExtendableTextFieldWithMixedAccessibleContext")) {
+                    name.equals("com.intellij.ide.ui.newItemPopup.NewItemWithTemplatesPopupPanel$JBExtendableTextFieldWithMixedAccessibleContext") ||
+                    name.equals("com.intellij.ide.projectView.impl.ProjectViewPane$1")) {
                 activateInsertMode(lastEditorUsed, true);
             }
         }
