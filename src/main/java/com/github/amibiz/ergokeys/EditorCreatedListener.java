@@ -42,7 +42,7 @@ public class EditorCreatedListener implements EditorFactoryListener {
             @Override
             public void focusLost(FocusEvent focusEvent) {
                 LOG.debug("focusLost: focusEvent=", focusEvent);
-                ErgoKeysService.getInstance().editorFocusLost(focusEvent, editor);
+                ErgoKeysService.getInstance().editorFocusLost(focusEvent);
             }
         });
     }

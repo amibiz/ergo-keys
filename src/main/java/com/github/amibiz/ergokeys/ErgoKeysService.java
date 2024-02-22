@@ -33,9 +33,12 @@ import com.intellij.openapi.keymap.KeymapManager;
 import com.intellij.openapi.keymap.ex.KeymapManagerEx;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.LightVirtualFile;
+import com.intellij.ui.popup.AbstractPopup;
+import com.intellij.util.ui.UIUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.util.HashSet;
 import java.util.Set;
@@ -276,19 +279,26 @@ public final class ErgoKeysService {
             return;
         }
         editor.getSettings().setBlockCursor(inCommandMode());
+        lastEditorUsed = editor;
     }
 
-    public void editorFocusLost(FocusEvent focusEvent, Editor editor) {
+    public void editorFocusLost(FocusEvent focusEvent) {
         if (focusEvent.getOppositeComponent() != null) {
+            // Switch to insert mode if we lost focus to a popup
+            for (Component c : UIUtil.uiParents(focusEvent.getOppositeComponent(), false)) {
+                if (c instanceof AbstractPopup.MyContentPanel) {
+                    activateInsertMode(lastEditorUsed, true);
+                }
+            }
+
+            // Switch to insert mode if we lost focus to specific UI components
             String name = focusEvent.getOppositeComponent().getClass().getName();
             if (name.equals("com.intellij.terminal.JBTerminalPanel") ||
                     name.equals("com.intellij.ui.EditorTextField") ||
                     name.startsWith("com.intellij.ui.EditorComboBoxEditor") ||
-                    name.equals("com.intellij.ide.ui.newItemPopup.NewItemWithTemplatesPopupPanel$JBExtendableTextFieldWithMixedAccessibleContext") ||
                     name.equals("com.intellij.ide.projectView.impl.ProjectViewPane$1")) {
                 activateInsertMode(lastEditorUsed, true);
             }
         }
-        lastEditorUsed = editor;
     }
 }
