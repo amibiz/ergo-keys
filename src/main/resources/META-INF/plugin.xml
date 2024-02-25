@@ -20,15 +20,12 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <change-notes><![CDATA[
-    <h1>1.17</h1>
+    <h1>1.18</h1>
     <ul>
-        <li>#42 Fix missing extended command mode keymaps shortcuts</li>
-        <li>Fix stuck command mode for actions that have text field</li>
-        <li>Prevent select string action from crashing the IDE in remote development</li>
-        <li>Improve actions text and description</li>
-        <li>Re-activate command mode after closing dialogs</li>
-        <li>Shorten status bar indicator text and add tooltip</li>
-        <li>Performance and stability improvements</li>
+        <li>Fix popups stuck in command mode on focus</li>
+        <li>Fix project view stuck in command mode on focus</li>
+        <li>Fix file structure popup stuck in command mode in remote development</li>
+        <li>Fix replace input field stuck in command mode</li>
     </ul>
     ]]></change-notes>
 
