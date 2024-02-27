@@ -159,7 +159,7 @@
         <keyboard-shortcut first-keystroke="SPACE"
                            second-keystroke="N"/>
     </action>
-    <action id="FileStructurePopup">
+    <action id="ErgoKeysFileStructurePopup">
         <keyboard-shortcut first-keystroke="SPACE"
                            second-keystroke="P"/>
     </action>
