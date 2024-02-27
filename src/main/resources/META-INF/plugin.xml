@@ -95,6 +95,10 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
                 class="com.github.amibiz.ergokeys.actions.ErgoKeysFileStructurePopup"
                 text="ErgoKeysFileStructurePopup"
                 description="ErgoKeysFileStructurePopup"/>
+        <action id="ErgoKeysFindInPath"
+                class="com.github.amibiz.ergokeys.actions.ErgoKeysFindInPath"
+                text="ErgoKeysFindInPath"
+                description="ErgoKeysFindInPath"/>
 
         <!-- Note that order matters, noop action must be declared last otherwise it
              will take precedence over actions declared after it-->
