@@ -33,6 +33,7 @@ import com.intellij.openapi.keymap.KeymapManager;
 import com.intellij.openapi.keymap.ex.KeymapManagerEx;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.LightVirtualFile;
+import com.intellij.ui.TextFieldWithHistory;
 import com.intellij.ui.popup.AbstractPopup;
 import com.intellij.util.ui.UIUtil;
 import org.jetbrains.annotations.NotNull;
@@ -288,10 +289,17 @@ public final class ErgoKeysService {
             for (Component c : UIUtil.uiParents(focusEvent.getOppositeComponent(), false)) {
                 if (c instanceof AbstractPopup.MyContentPanel) {
                     activateInsertMode(lastEditorUsed, true);
+                    return;
                 }
             }
 
-            // Switch to insert mode if we lost focus to specific UI components
+            // Switch to insert mode if we lost focus to specific UI components (by class)
+            if (focusEvent.getOppositeComponent() instanceof TextFieldWithHistory) {
+                activateInsertMode(lastEditorUsed, true);
+                return;
+            }
+
+            // Switch to insert mode if we lost focus to specific UI components (by name)
             String name = focusEvent.getOppositeComponent().getClass().getName();
             if (name.equals("com.intellij.terminal.JBTerminalPanel") ||
                     name.equals("com.intellij.ui.EditorTextField") ||
