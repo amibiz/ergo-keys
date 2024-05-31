@@ -20,12 +20,12 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <change-notes><![CDATA[
-    <h1>1.18</h1>
+    <h1>1.19</h1>
     <ul>
-        <li>Fix popups stuck in command mode on focus</li>
-        <li>Fix project view stuck in command mode on focus</li>
-        <li>Fix file structure popup stuck in command mode in remote development</li>
-        <li>Fix replace input field stuck in command mode</li>
+        <li>Fix refactor move member stuck in command mode</li>
+        <li>Fix text field with history stuck in command mode on focus</li>
+        <li>Fix file structure popup stuck in command mode in remote development (QWERTY)</li>
+        <li>Fix find in path stuck in command mode in remote development</li>
     </ul>
     ]]></change-notes>
 
