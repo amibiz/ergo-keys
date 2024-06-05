@@ -79,7 +79,12 @@ public final class ErgoKeysService {
         // Setup command mode keymap
         String commandModeKeymapName = loadPersistentProperty(COMMAND_MODE_KEYMAP_PERSISTENT_PROPERTY_NAME);
         if (commandModeKeymapName == null) {
-            // First time plugin loaded
+            // First time plugin installed
+            commandModeKeymapName = DEFAULT_ERGOKEYS_KEYMAP;
+        }
+        if (keymapManagerEx.getKeymap(commandModeKeymapName) == null) {
+            // Plugin was updated/re-installed and old command mode keymap name exists
+            // in persistent storage but the keymap is not available yet.
             commandModeKeymapName = DEFAULT_ERGOKEYS_KEYMAP;
         }
         setCommandModeKeymap(keymapManagerEx.getKeymap(commandModeKeymapName));
