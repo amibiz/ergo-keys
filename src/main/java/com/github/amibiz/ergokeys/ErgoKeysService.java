@@ -273,13 +273,23 @@ public final class ErgoKeysService {
         return virtualFile != null && !(virtualFile instanceof LightVirtualFile);
     }
 
-    public void editorFocusGained(Editor editor) {
+    public void editorFocusGained(Editor editor, FocusEvent focusEvent) {
+        // Switch to insert mode if we gained focus to a UI component that is a
+        // descended of a specific UI component (by name)
+        for (Component c : UIUtil.uiParents(focusEvent.getComponent(), false)) {
+            if (c.getClass().getName().equals("com.intellij.openapi.vcs.ui.CommitMessage")) {
+                activateInsertMode(lastEditorUsed, true);
+                return;
+            }
+        }
+
+        // Do not change state if we are in an EditorComponent that
+        // has no file (for example, the editor text field component
+        // used when right-clicking rename a file in project view).
         if (!isFileEditor(editor)) {
-            // Do not change state if we are in an EditorComponent that
-            // has no file (for example, the editor text field component
-            // used when right-clicking rename a file in project view).
             return;
         }
+
         if (state == ModeState.TRAN_INS) {
             activateCommandMode(editor);
             return;
@@ -310,7 +320,8 @@ public final class ErgoKeysService {
                     name.equals("com.intellij.ui.EditorTextField") ||
                     name.equals("com.intellij.ui.EditorComboBox") ||
                     name.startsWith("com.intellij.ui.EditorComboBoxEditor") ||
-                    name.equals("com.intellij.ide.projectView.impl.ProjectViewPane$1")) {
+                    name.equals("com.intellij.ide.projectView.impl.ProjectViewPane$1") ||
+                    name.equals("com.intellij.openapi.vcs.changes.ChangesViewManager$LocalChangesListView")) {
                 activateInsertMode(lastEditorUsed, true);
             }
         }
