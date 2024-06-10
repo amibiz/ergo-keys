@@ -300,6 +300,14 @@ public final class ErgoKeysService {
 
     public void editorFocusLost(FocusEvent focusEvent) {
         if (focusEvent.getOppositeComponent() != null) {
+            // Switch to insert mode if we lost focus to a dialog
+            for (Component c : UIUtil.uiParents(focusEvent.getOppositeComponent(), false)) {
+                if (c.getClass().getName().equals("com.intellij.openapi.ui.impl.DialogWrapperPeerImpl$MyDialog")) {
+                    activateInsertMode(lastEditorUsed, true);
+                    return;
+                }
+            }
+
             // Switch to insert mode if we lost focus to a popup
             for (Component c : UIUtil.uiParents(focusEvent.getOppositeComponent(), false)) {
                 if (c instanceof AbstractPopup.MyContentPanel) {
