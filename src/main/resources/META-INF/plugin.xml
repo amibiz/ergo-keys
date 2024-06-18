@@ -20,13 +20,9 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <change-notes><![CDATA[
-    <h1>1.20</h1>
+    <h1>1.21-dev</h1>
     <ul>
-        <li>Fix new project dialog stuck in command mode</li>
-        <li>Fix commit message stuck in command mode</li>
-        <li>Fix exception on update/re-install of plugin</li>
-        <li>Update gradle to version 8.8</li>
-        <li>Update gradle intellij plugin to version 1.17.3</li>
+        <li></li>
     </ul>
     ]]></change-notes>
 
