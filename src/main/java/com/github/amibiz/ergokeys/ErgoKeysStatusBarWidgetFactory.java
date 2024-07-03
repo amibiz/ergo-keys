@@ -15,22 +15,22 @@ import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.wm.StatusBar;
 import com.intellij.openapi.wm.StatusBarWidget;
-import com.intellij.openapi.wm.StatusBarWidgetFactory;
+import com.intellij.openapi.wm.impl.status.widget.StatusBarEditorBasedWidgetFactory;
 import kotlinx.coroutines.CoroutineScope;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-public class ErgoKeysStatusBarWidgetFactory implements StatusBarWidgetFactory {
+public class ErgoKeysStatusBarWidgetFactory extends StatusBarEditorBasedWidgetFactory {
     private static final Logger LOG = Logger.getInstance(ErgoKeysStatusBarWidgetFactory.class);
 
     @Override
     public @NotNull @NonNls String getId() {
-        return "ErgoKeys";
+        return ErgoKeysStatusBarWidget.WIDGET_ID;
     }
 
     @Override
     public @NotNull @NlsContexts.ConfigurableName String getDisplayName() {
-        return "ErgoKeys";
+        return ErgoKeysStatusBarWidget.WIDGET_ID;
     }
 
     @Override
@@ -39,22 +39,10 @@ public class ErgoKeysStatusBarWidgetFactory implements StatusBarWidgetFactory {
     }
 
     @Override
-    public boolean isAvailable(@NotNull Project project) {
-        return true;
-    }
-
-    @Override
-    public @NotNull StatusBarWidget createWidget(@NotNull Project project) {
-        LOG.debug("createWidget: project=", project);
-
-        return new ErgoKeysStatusBarWidget(project);
-    }
-
-    @Override
     public @NotNull StatusBarWidget createWidget(@NotNull Project project, @NotNull CoroutineScope scope) {
         LOG.debug("createWidget: project=", project, " scope=", scope);
 
-        return createWidget(project);
+        return new ErgoKeysStatusBarWidget(project, scope);
     }
 
     @Override
