@@ -9,13 +9,10 @@
 
 package com.github.amibiz.ergokeys;
 
-import com.intellij.ide.plugins.IdeaPluginDescriptor;
-import com.intellij.ide.plugins.PluginManagerCore;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.KeymapManagerListener;
 import com.intellij.openapi.project.Project;
@@ -39,7 +36,6 @@ public class ErgoKeysStatusBarWidget extends EditorBasedStatusBarPopup {
     private static final String INSERT_MODE_WIDGET_PANEL_TEXT = "INS";
     private static final String COMMAND_MODE_WIDGET_TOOLTIP_TEXT = "Command Mode";
     private static final String INSERT_MODE_WIDGET_TOOLTIP_TEXT = "Insert Mode";
-    private static final String ERGOKEYS_PLUGIN_ID = "com.github.amibiz.ergokeys";
 
     protected ErgoKeysStatusBarWidget(@NotNull Project project, @NotNull CoroutineScope scope) {
         super(project, true, scope);
@@ -56,17 +52,6 @@ public class ErgoKeysStatusBarWidget extends EditorBasedStatusBarPopup {
                     }
                 }
         );
-    }
-
-    @NotNull
-    private static PluginId getPluginId() {
-        return PluginId.getId(ERGOKEYS_PLUGIN_ID);
-    }
-
-    @NotNull
-    private static String getVersion() {
-        final IdeaPluginDescriptor plugin = PluginManagerCore.getPlugin(getPluginId());
-        return plugin != null ? plugin.getVersion() : "SNAPSHOT";
     }
 
     @Override
@@ -93,7 +78,7 @@ public class ErgoKeysStatusBarWidget extends EditorBasedStatusBarPopup {
                 null,
                 false
         );
-        popup.setAdText(getVersion(), SwingConstants.CENTER);
+        popup.setAdText(ErgoKeysService.getPluginVersion(), SwingConstants.CENTER);
         return popup;
     }
 

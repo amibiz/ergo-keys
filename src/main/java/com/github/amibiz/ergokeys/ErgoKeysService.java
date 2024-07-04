@@ -16,6 +16,8 @@ import com.intellij.ide.actions.SearchEverywhereAction;
 import com.intellij.ide.actions.Switcher;
 import com.intellij.ide.actions.ViewStructureAction;
 import com.intellij.ide.actions.runAnything.RunAnythingAction;
+import com.intellij.ide.plugins.IdeaPluginDescriptor;
+import com.intellij.ide.plugins.PluginManagerCore;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -27,6 +29,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.actions.IncrementalFindAction;
 import com.intellij.openapi.editor.actions.ReplaceAction;
+import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.keymap.Keymap;
 import com.intellij.openapi.keymap.KeymapManager;
@@ -113,6 +116,17 @@ public final class ErgoKeysService {
         } else {
             setState(ModeState.INS);
         }
+    }
+
+    @NotNull
+    private static PluginId getPluginId() {
+        return PluginId.getId(PLUGIN_ID);
+    }
+
+    @NotNull
+    public static String getPluginVersion() {
+        final IdeaPluginDescriptor plugin = PluginManagerCore.getPlugin(getPluginId());
+        return plugin != null ? plugin.getVersion() : "SNAPSHOT";
     }
 
     private void setState(ModeState state) {
