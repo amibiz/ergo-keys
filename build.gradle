@@ -25,6 +25,6 @@ intellij {
 }
 
 patchPluginXml {
-    sinceBuild = '213'
+    sinceBuild = '231'
     untilBuild = ''
 }
