@@ -20,9 +20,9 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <change-notes><![CDATA[
-    <h1>1.21</h1>
+    <h1>1.22-dev</h1>
     <ul>
-        <li>Show plugin version in panel widget</li>
+        <li></li>
     </ul>
     ]]></change-notes>
 
