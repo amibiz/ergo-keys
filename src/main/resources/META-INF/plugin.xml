@@ -20,7 +20,7 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <change-notes><![CDATA[
-    <h1>1.22-dev</h1>
+    <h1>1.22</h1>
     <ul>
         <li>
             New action that cycles between cases:<br>
