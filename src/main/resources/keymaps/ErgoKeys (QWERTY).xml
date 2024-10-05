@@ -135,6 +135,10 @@
     <action id="EditorToggleCase">
         <keyboard-shortcut first-keystroke="B"/>
     </action>
+    <action id="ErgoKeysCaseCycle">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="B"/>
+    </action>
     <action id="HippieCompletion">
         <keyboard-shortcut first-keystroke="OPEN_BRACKET"/>
     </action>

@@ -22,7 +22,13 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     <change-notes><![CDATA[
     <h1>1.22-dev</h1>
     <ul>
-        <li></li>
+        <li>
+            New action that cycles between cases:<br>
+            <br>
+            camelCase → snake_case → kebab-case → PascalCase<br>
+            <br>
+            Shortcut: [Leader/Space] + B
+        </li>
     </ul>
     ]]></change-notes>
 
@@ -96,6 +102,10 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
                 class="com.github.amibiz.ergokeys.actions.ErgoKeysFindInPath"
                 text="ErgoKeysFindInPath"
                 description="ErgoKeysFindInPath"/>
+        <action id="ErgoKeysCaseCycle"
+                class="com.github.amibiz.ergokeys.actions.CaseCycleAction"
+                text="Cycle Case"
+                description="Converts the word under the caret from camelCase to snake_case to kebab-case to PascalCase"/>
 
         <!-- Note that order matters, noop action must be declared last otherwise it
              will take precedence over actions declared after it-->

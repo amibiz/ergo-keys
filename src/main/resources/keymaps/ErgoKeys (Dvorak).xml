@@ -135,6 +135,10 @@
     <action id="EditorToggleCase">
         <keyboard-shortcut first-keystroke="X"/>
     </action>
+    <action id="ErgoKeysCaseCycle">
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="X"/>
+    </action>
     <action id="HippieCompletion">
         <keyboard-shortcut first-keystroke="SLASH"/>
     </action>
