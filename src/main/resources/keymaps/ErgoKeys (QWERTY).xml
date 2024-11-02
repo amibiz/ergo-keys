@@ -170,6 +170,8 @@
     <action id="ShowIntentionActions">
         <keyboard-shortcut first-keystroke="SPACE"
                            second-keystroke="ENTER"/>
+        <keyboard-shortcut first-keystroke="SPACE"
+                           second-keystroke="DELETE"/>
     </action>
 
 </keymap>
