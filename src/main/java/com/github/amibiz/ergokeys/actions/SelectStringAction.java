@@ -25,7 +25,12 @@ public class SelectStringAction extends DumbAwareAction {
     public void actionPerformed(AnActionEvent e) {
         LOG.debug("actionPerformed: event.getInputEvent=", e.getInputEvent());
 
-        final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
+        final Editor editor = e.getData(CommonDataKeys.EDITOR);
+        if (editor == null) {
+            LOG.debug("actionPerformed: editor is null");
+            return;
+        }
+
         final Document document = editor.getDocument();
         final SelectionModel selectionModel = editor.getSelectionModel();
         final ActionManager actionManager = ActionManager.getInstance();

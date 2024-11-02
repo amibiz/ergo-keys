@@ -29,7 +29,13 @@ public class ActivateInsertModeSpaceBeforeAction extends DumbAwareAction {
     public void actionPerformed(AnActionEvent e) {
         LOG.debug("actionPerformed: event.getInputEvent=", e.getInputEvent());
 
-        final Editor editor = e.getRequiredData(CommonDataKeys.EDITOR);
+        // Get all the required data from data keys
+        final Editor editor = e.getData(CommonDataKeys.EDITOR);
+        if (editor == null) {
+            LOG.debug("actionPerformed: editor is null");
+            return;
+        }
+
         final Project project = e.getProject();
         final Document document = editor.getDocument();
         final CaretModel caretModel = editor.getCaretModel();
