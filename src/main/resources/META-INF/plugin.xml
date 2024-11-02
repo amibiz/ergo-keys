@@ -20,15 +20,9 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <change-notes><![CDATA[
-    <h1>1.22</h1>
+    <h1>1.23-dev</h1>
     <ul>
-        <li>
-            New action that cycles between cases:<br>
-            <br>
-            camelCase → snake_case → kebab-case → PascalCase<br>
-            <br>
-            Shortcut: [Leader/Space] + B
-        </li>
+        <li></li>
     </ul>
     ]]></change-notes>
 
