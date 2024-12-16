@@ -20,13 +20,9 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <change-notes><![CDATA[
-    <h1>1.23</h1>
+    <h1>1.24-dev</h1>
     <ul>
-        <li>
-            Show context actions binding for split keyboards<br>
-            <br>
-            Shortcut: [Leader/Space] + Delete
-        </li>
+        <li></li>
     </ul>
     ]]></change-notes>
 
