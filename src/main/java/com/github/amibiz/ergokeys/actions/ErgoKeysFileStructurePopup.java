@@ -38,6 +38,6 @@ public class ErgoKeysFileStructurePopup extends DumbAwareAction {
 
         // Call file structure popup action directly
         final ActionManager actionManager = ActionManager.getInstance();
-        actionManager.getAction(IdeActions.ACTION_FILE_STRUCTURE_POPUP).actionPerformed(e);
+        actionManager.tryToExecute(actionManager.getAction(IdeActions.ACTION_FILE_STRUCTURE_POPUP), null, null, null, true);
     }
 }

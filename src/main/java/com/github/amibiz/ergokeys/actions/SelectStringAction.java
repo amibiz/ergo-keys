@@ -9,7 +9,10 @@
 
 package com.github.amibiz.ergokeys.actions;
 
-import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
+import com.intellij.openapi.actionSystem.IdeActions;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
@@ -40,8 +43,7 @@ public class SelectStringAction extends DumbAwareAction {
         while (iterations < MAX_ITERATIONS) {
             iterations++;
 
-            AnAction action = actionManager.getAction(IdeActions.ACTION_EDITOR_SELECT_WORD_AT_CARET);
-            action.actionPerformed(e);
+            actionManager.tryToExecute(actionManager.getAction(IdeActions.ACTION_EDITOR_SELECT_WORD_AT_CARET), null, null, null, true);
 
             final int start = selectionModel.getSelectionStart();
             final int end = selectionModel.getSelectionEnd();

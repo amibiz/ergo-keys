@@ -47,6 +47,7 @@ public class ActivateInsertModeSpaceBeforeAction extends DumbAwareAction {
                 document.insertString(caret.getOffset(), " ");
             }
         });
-        actionManager.getAction("ErgoKeysInsertMode").actionPerformed(e);
+
+        actionManager.tryToExecute(actionManager.getAction("ErgoKeysInsertMode"), null, null, null, true);
     }
 }

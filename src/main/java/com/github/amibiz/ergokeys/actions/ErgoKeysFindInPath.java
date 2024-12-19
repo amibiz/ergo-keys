@@ -38,6 +38,6 @@ public class ErgoKeysFindInPath extends DumbAwareAction {
 
         // Call find in path action directly
         final ActionManager actionManager = ActionManager.getInstance();
-        actionManager.getAction(IdeActions.ACTION_FIND_IN_PATH).actionPerformed(e);
+        actionManager.tryToExecute(actionManager.getAction(IdeActions.ACTION_FIND_IN_PATH), null, null, null, true);
     }
 }

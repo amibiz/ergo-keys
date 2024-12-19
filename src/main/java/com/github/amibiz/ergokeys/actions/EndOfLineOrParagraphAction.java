@@ -46,6 +46,6 @@ public class EndOfLineOrParagraphAction extends DumbAwareAction {
             ideActionId = IdeActions.ACTION_EDITOR_FORWARD_PARAGRAPH;
         }
 
-        actionManager.getAction(ideActionId).actionPerformed(e);
+        actionManager.tryToExecute(actionManager.getAction(ideActionId), null, null, null, true);
     }
 }

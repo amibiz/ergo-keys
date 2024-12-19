@@ -24,8 +24,8 @@ public class DeleteCurrentCodeBlockAction extends DumbAwareAction {
 
         final ActionManager actionManager = ActionManager.getInstance();
 
-        actionManager.getAction("EditorCodeBlockStart").actionPerformed(e);
-        actionManager.getAction("EditorCodeBlockEndWithSelection").actionPerformed(e);
-        actionManager.getAction(IdeActions.ACTION_DELETE).actionPerformed(e);
+        actionManager.tryToExecute(actionManager.getAction("EditorCodeBlockStart"), null, null, null, true);
+        actionManager.tryToExecute(actionManager.getAction("EditorCodeBlockEndWithSelection"), null, null, null, true);
+        actionManager.tryToExecute(actionManager.getAction(IdeActions.ACTION_DELETE), null, null, null, true);
     }
 }

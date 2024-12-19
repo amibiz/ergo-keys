@@ -46,6 +46,6 @@ public class StartOfLineOrParagraphAction extends DumbAwareAction {
             ideActionId = IdeActions.ACTION_EDITOR_BACKWARD_PARAGRAPH;
         }
 
-        actionManager.getAction(ideActionId).actionPerformed(e);
+        actionManager.tryToExecute(actionManager.getAction(ideActionId), null, null, null, true);
     }
 }
