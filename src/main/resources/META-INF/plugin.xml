@@ -20,9 +20,9 @@ U (dvorak)   activate <i>Insert Mode</i></pre>
     ]]></description>
 
     <change-notes><![CDATA[
-    <h1>1.24-dev</h1>
+    <h1>1.24</h1>
     <ul>
-        <li></li>
+        <li>Fix actionPerformed() API usage violations</li>
     </ul>
     ]]></change-notes>
 
